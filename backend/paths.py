@@ -28,11 +28,11 @@ UPLOAD_PATH = DATA_PATH / "uploads"
 JOB_LOGS_PATH = LOGS_PATH / "jobs"
 
 # ENV File
-RISA_ENV_FILE = os.environ.get("ENV_FILE")
+ENV_FILE_FROM_ENV = os.environ.get("ENV_FILE")
 
 ENV_FILES_PATHS = [
-    Path(RISA_ENV_FILE) if RISA_ENV_FILE else None,
-    PROJECT_PATH / RISA_ENV_FILE if RISA_ENV_FILE else None,
+    Path(ENV_FILE_FROM_ENV) if ENV_FILE_FROM_ENV else None,
+    PROJECT_PATH / ENV_FILE_FROM_ENV if ENV_FILE_FROM_ENV else None,
     DATA_PATH / ".env",
 ]
 ENV_FILE = None
