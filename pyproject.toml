@@ -5,13 +5,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "vcore"
-version = "0.0.15"
-description = "risa"
+version = "1.0.0-alpha.1"
+description = "vcore"
 readme = "README.md"
 authors = ["martokk <25113632+martokk@users.noreply.github.com>"]
 license = "MIT"
-repository = "https://github.com/martokk/risa"
-homepage = "https://github.com/martokk/risa"
+repository = "https://github.com/martokk/vcore"
+homepage = "https://github.com/martokk/vcore"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = ["fastapi", "poetry", "python", "sqlmodel", "alembic", "loguru", "crud"]
@@ -39,29 +39,27 @@ pyjwt = "^2.10.0"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 alembic = "^1.14.0"
 asyncpg = "^0.30.0"
+psycopg2-binary = "^2.9.10"
 python-multipart = "^0.0.17"
 pydantic = "^2.10.2"
 sqlmodel = "^0.0.22"
 types-pyyaml = "^6.0.12.8"
 types-attrs = "^19.1.0"
 pydantic-settings = "^2.6.1"
-anthropic = "^0.43.0"
-google-generativeai = "^0.8.3"
-groq = "^0.15.0"
-openai = "^1.59.7"
 email-validator = "^2.2.0"
 emails = "^0.6"
-chromadb = "^0.6.3"
-python-docx = "^1.1.2"
-phidata = "^2.7.10"
-safetensors = "^0.5.3"
 markdown = "^3.8"
 pillow = "^11.2.1"
 huey = {extras = ["sqlite"], version = "^2.5.3"}
-tinydb = "^4.8.2"
-debugpy = "^1.8.14"
-psycopg2-binary = "^2.9.10"
 toml = "^0.10.2"
+
+# AI
+openai = "^1.59.7"
+groq = "^0.15.0"
+google-generativeai = "^0.8.3"
+anthropic = "^0.43.0"
+chromadb = "^0.6.3"
+phidata = "^2.7.10"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.10"
