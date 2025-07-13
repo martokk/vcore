@@ -1,0 +1,215 @@
+---
+description: FOLLOW when ADDING a new 'quick tool' to ensure consistent implementation. FOLLOW when asked to add or create a new quick tool.
+globs: **/*
+alwaysApply: true
+---
+
+# Creating a new vCore Quick Tool
+
+## Overview
+
+This guide provides a comprehensive checklist for implementing new "Quick Tools" in the vCore application. Each tool typically consists of:
+
+1. Backend service function(s)
+2. API endpoint(s)
+3. Web page handler
+4. HTML template
+5. Integration with navigation
+
+## How it works
+
+- User inputs data into a form and submits it to the API endpoint
+- The API endpoint processes the data and returns a response
+- The Quick Tool dynamically displays the results in the HTML template
+
+## Detailed Implementation Checklist
+
+### 1. Backend Service Implementation
+
+- [ ] Identify the core functionality needed for the Quick Tool
+- [ ] Create/update service/logic function(s) in the appropriate service/logic file (e.g., `app/services/{service_name}.py` if its a service or `app/services/{service_name}.py` if its business logic)
+- [ ] Include proper error handling in service/logic functions
+- [ ] Add type hints to all parameters and return values
+- [ ] Add comprehensive docstrings to explain function purpose and parameters
+- [ ] Write any necessary helper functions
+
+### 2. API Endpoint Creation
+
+- [ ] Add API endpoint in appropriate file (`app/routes/api/v1/endpoints/{endpoint_name}.py`)
+- [ ] Ensure the endpoint follows RESTful conventions
+- [ ] Include proper request validation
+- [ ] Add error handling with appropriate status codes
+- [ ] Document the endpoint with docstrings
+- [ ] Use appropriate response classes (JSONResponse)
+- [ ] If creating a new endpoint file, import it in `app/routes/api/__init__.py`, Do not make sweeping changes, just the import.
+
+### 3. Web Page Handler
+
+- [ ] Create/update handler in `app/routes/views/quick_tools/{quick_tool_name}.py`
+- [ ] Implement GET route for rendering the Quick Tool page
+- [ ] Generally the POST of forms will be in the api enpoint discussed above in #2.
+- [ ] Ensure proper template context is provided
+- [ ] Add proper error handling and validation
+- [ ] Use appropriate response classes (HTMLResponse)
+
+### 4. HTML Template
+
+- [ ] Create HTML template in `frontend/templates/quick_tools/{quick_tool_name}.html`
+- [ ] Extend from `quick_tools/quick_tool_base.html`
+- [ ] Implement all required template blocks:
+    - [ ] `title` - Page title
+    - [ ] `quick_tool_name` - Quick Tool name in the header
+    - [ ] `quick_tool_description` - Brief description of the quick tool
+    - [ ] `quick_tool_input_form` - The form with input fields
+    - [ ] `loading_text` - Text shown during processing
+    - [ ] `loading_text_muted` - Additional loading information
+    - [ ] `results_card_body` - Results display structure
+    - [ ] `js_scripts` - JavaScript for form processing
+- [ ] Create a form with appropriate input fields and validation
+- [ ] Don't ever use 'bg-light' class, since we are using dark theme.
+- [ ] Using bootstrap, add color the the results including the title/header, etc.
+
+### 5. Integration
+
+- [ ] Add router to `app/routes/views/__init__.py` in the appropriate section
+- [ ] Add navigation link in `frontend/templates/base/_sidebar.html`
+- [ ] Place the link in the appropriate dropdown or section.
+- [ ] If needed, add a divider
+- [ ] Maintain alphabetical or logical ordering of menu items, ususally grouped together by similarities
+
+### 6. Error Handling & Validation
+
+- [ ] Validate user inputs in both frontend and backend
+- [ ] Handle and display appropriate error messages
+- [ ] Add try/catch blocks around service calls
+- [ ] Return user-friendly error responses
+
+## Example Implementation Structure
+
+### Service/Logic Function Example
+
+```python
+def process_quick_tool_data(input_text: str, option: str = "default") -> dict[str, Any]:
+    """
+    Process data for the quick tool.
+    
+    Args:
+        input_text: Text input from user
+        option: Processing option
+        
+    Returns:
+        Dictionary with processed results
+    """
+    try:
+        # Core processing logic
+        result = {"success": True, "data": processed_data}
+        return result
+    except Exception as e:
+        logger.error(f"Error processing quick tool data: {str(e)}")
+        return {"success": False, "error": str(e)}
+```
+
+### API Endpoint Example
+
+```python
+@router.post("/api/v1/endpoints/quick-tool-name")
+async def quick_tool_api_endpoint(
+    request: Request,
+    input_text: Annotated[str, Form()],
+    option: Annotated[str, Form()] = "default",
+    db: Annotated[Session, Depends(get_db)],
+) -> JSONResponse:
+    """API endpoint for the quick tool."""
+    try:
+        result = process_quick_tool_data(
+            input_text=input_text,
+            option=option,
+        )
+        
+        return JSONResponse(
+            content={
+                "success": True,
+                "result": result,
+            }
+        )
+    except Exception as e:
+        return JSONResponse(
+            content={
+                "success": False,
+                "error": str(e),
+            },
+            status_code=500,
+        )
+```
+
+### HTML Template Example
+
+```html
+{% extends "quick_tools/quick_tool_base.html" %}
+
+{% block title %}Quick Tool Name{% endblock %}
+{% block quick_tool_name %}Quick Tool Name{% endblock %}
+
+{% block quick_tool_description %}
+    This quick tool processes input data to produce useful outputs.
+{% endblock %}
+
+{% block quick_tool_input_form %}
+    <form id="quickToolForm">
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Input Text</label>
+            <textarea class="form-control" id="inputText" name="input_text" rows="6" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="option" class="form-label">Processing Option</label>
+            <select class="form-select" id="option" name="option">
+                <option value="default">Default</option>
+                <option value="alternative">Alternative</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Process</button>
+    </form>
+{% endblock %}
+
+{% block loading_text %}Processing your input...{% endblock %}
+{% block loading_text_muted %}This may take a moment.{% endblock %}
+
+{% block results_card_body %}
+    <div id="resultContainer">
+        <!-- Results will be displayed here -->
+    </div>
+{% endblock %}
+
+{% block js_scripts %}
+<script type="module">
+    import { FormProcessor } from '/static/js/form_processor.js';
+    
+    FormProcessor.initializeForm({
+        formId: 'quickToolForm',
+        endpoint: '/quick_tools/quick_tool_name',
+        method: 'POST',
+        processSuccessResponse: function(data, resultSection) {
+            if (data.success) {
+                const resultContainer = document.getElementById('resultContainer');
+                resultContainer.innerHTML = `<pre>${JSON.stringify(data.result, null, 2)}</pre>`;
+            } else {
+                throw new Error(data.error || 'Unknown error occurred');
+            }
+        }
+    });
+</script>
+{% endblock %}
+```
+
+## Final Verification Checklist
+
+- [ ] Service functions work as expected
+- [ ] API endpoints return correct responses
+- [ ] Web page displays properly
+- [ ] Form validation works correctly
+- [ ] Results display correctly, with some color
+- [ ] Error handling works properly
+- [ ] Navigation links are correct
+- [ ] Quick Tool is accessible from the navbar
+- [ ] Code follows project style guidelines
+- [ ] No linter errors are present
