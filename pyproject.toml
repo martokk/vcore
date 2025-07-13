@@ -4,7 +4,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "app"
+name = "vcore"
 version = "0.0.15"
 description = "risa"
 readme = "README.md"
