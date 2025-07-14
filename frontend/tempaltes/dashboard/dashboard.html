@@ -1,0 +1,44 @@
+{% extends "/base/sidebar_left_and_right.html" %}
+
+
+{% block title %}Risa Playground App Manager{% endblock %}
+
+
+{% block sidebar_left %}
+{% endblock sidebar_left %}
+
+
+{% block sidebar_right %}
+{% endblock sidebar_right %}
+
+
+{% block content %}
+    <div class="row">
+
+        <!-- Column 2.1 -->
+        <div class="col-xxl-6">
+            {% include "/dashboard/_jobs_queue.html" %}
+        </div>
+
+        <!-- Column 2.2 -->
+        <div class="col-xxl-6">
+            {% include "/scripts/_scripts_jobs.html" %}
+        </div>
+
+    </div>
+{% endblock content %}
+
+
+{% block js_scripts %}
+    <script type="module">
+        import { initializeApi, apiCrud, uiHelpers } from '/vcore/static/js/api_utils.js';
+        import { toast } from '/vcore/static/js/toast.js';
+
+        initializeApi({
+            access_token: "{{ tokens.access_token }}",
+            refresh_token: "{{ tokens.refresh_token }}"
+        });
+
+
+    </script>
+{% endblock %}

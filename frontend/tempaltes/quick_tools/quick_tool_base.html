@@ -1,0 +1,70 @@
+{% extends "base/container.html" %}
+
+{% block title %}Quick Tool{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <!-- Card Header -->
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Quick Tool: {% block quick_tool_name %}{% endblock quick_tool_name %}</h5>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <p class="card-text">
+                        {% block quick_tool_description %}{% endblock quick_tool_description %}
+                    </p>
+                    {% block quick_tool_input_form %}{% endblock quick_tool_input_form %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="row mt-4" id="resultSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Results</h5>
+                </div>
+                <div class="card-body">
+                    {% block results_card_body %}{% endblock results_card_body %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Section -->
+    <div class="row mt-4" id="loadingSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">{% block loading_text %}{% endblock loading_text %}</p>
+                    <p class="text-muted">{% block loading_text_muted %}{% endblock loading_text_muted %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Section -->
+    <div class="row mt-4" id="errorSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Error:</h5>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

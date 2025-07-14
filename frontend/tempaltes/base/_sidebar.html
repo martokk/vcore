@@ -1,0 +1,138 @@
+{% block sidebar %}
+  {% if current_user %}
+    <aside class="main-sidebar">
+      <section class="sidebar">
+        <ul class="sidebar-menu">
+
+          <!-- Header -->
+          <li class="header">r | {{ PROJECT_NAME | upper }}</li>
+
+          <!-- Quick Links -->
+          <li><a href="/"><i class="fa fa-gauge fa-accent"></i> <span>Dashboard</span></a></li>
+          <li><a href="/jobs"><i class="fa fa-tasks fa-accent"></i> <span>Jobs</span></a></li>
+          <li><a href="/job-schedulers"><i class="fa fa-clock fa-accent"></i> <span>Job Schedulers</span></a></li>
+
+          <!-- Divider -->
+          <li class="divider"></li>
+
+          <!-- Manage -->
+          <li class="treeview">
+            <a href="#"><i class="fa fa-cogs"></i> <span>Manage</span> <i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="treeview-menu">
+
+              <!-- Examples -->
+              <li><a href="/examples"><i class="fa fa-circle-o"></i> Examples</a></li>
+
+              <!-- Divider -->
+              <li class="divider"></li>
+
+              <!-- Settings -->
+              <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Settings</a></li>
+
+            </ul>
+          </li>
+
+          <!-- Tools -->
+          <li class="treeview">
+            <a href="#"><i class="fa fa-wrench"></i> <span>Tools</span> <i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="treeview-menu">
+
+              <!-- Scripts -->
+              <li><a href="/scripts"><i class="fa fa-circle-o"></i> Scripts</a></li>
+
+              <!-- Divider -->
+              <li class="divider"></li>
+
+              <!-- Tools -->
+              <li><a href="/quick_tools/example"><i class="fa fa-circle-o"></i> Example</a></li>
+
+              <!-- Divider -->
+              <li class="divider"></li>
+
+              <!-- Backups -->
+              <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Backups</a></li>
+
+              <!-- System -->
+              <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> System</a></li>
+
+              <!-- Logs -->
+              <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Logs</a></li>
+            </ul>
+          </li>
+
+          <!-- Spacer -->
+          <li class="sidebar-flex-spacer"></li>
+
+          <!-- Dev -->
+          <li class="treeview">
+            <a href="#"><i class="fa fa-code"></i> <span>Dev</span> <i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="treeview-menu">
+
+              <!-- Dev Dashboard -->
+              <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Dev Dashboard</a></li>
+
+              <!-- Github -->
+              <li><a href="https://github.com/martokk/{{ PROJECT_NAME }}"><i class="fa fa-circle-o"></i> Github Repo</a></li>
+              <li><a href="https://github.com/martokk/{{ PROJECT_NAME }}/issues/new"><i class="fa fa-circle-o"></i> Create Github Issue</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <!-- Sidebar Footer Icons-->
+        <div class="sidebar-footer mt-4">
+          <a href="#" class="sidebar-icon disabled" title="Feed">
+            <i class="fa fa-rss text-white"></i>
+            <span class="badge sidebar-badge-accent">3</span>
+          </a>
+          <a href="#" class="sidebar-icon disabled" title="Tasks">
+            <i class="fa fa-tasks text-white"></i>
+            <span class="badge sidebar-badge-accent">5</span>
+          </a>
+          <a href="#" class="sidebar-icon disabled" title="Notifications">
+            <i class="fa fa-bell text-white"></i>
+            <span class="badge sidebar-badge-accent">1</span>
+          </a>
+        </div>
+
+      </section>
+    </aside>
+  {% endif %}
+{% endblock %}
+
+{% block js_scripts %}
+<script type="text/javascript">
+// Sidebar menu JS (jQuery required)
+$.sidebarMenu = function(menu) {
+    var animationSpeed = 300;
+    $(menu).on('click', 'li a', function(e) {
+        var $this = $(this);
+        var checkElement = $this.next();
+        if (checkElement.is('.treeview-menu') && checkElement.is(':visible')) {
+            checkElement.slideUp(animationSpeed, function() {
+                checkElement.removeClass('menu-open');
+            });
+            checkElement.parent("li").removeClass("active");
+        } else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
+            var parent = $this.parents('ul').first();
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            ul.removeClass('menu-open');
+            var parent_li = $this.parent("li");
+            checkElement.slideDown(animationSpeed, function() {
+                checkElement.addClass('menu-open');
+                parent.find('li.active').removeClass('active');
+                parent_li.addClass('active');
+            });
+        }
+        if (checkElement.is('.treeview-menu')) {
+            e.preventDefault();
+        }
+    });
+}
+
+// Only initialize once on DOM ready
+$(function() {
+    $.sidebarMenu($('.sidebar-menu'));
+});
+</script>
+{% endblock %} 
