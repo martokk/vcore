@@ -13,12 +13,12 @@ from huey import crontab
 from sqlmodel import Session
 
 from app import logger, paths, settings
+from app.jobs.job_type_scripts import hook_get_script_class_from_class_name
 from vcore.backend import crud, models
 from vcore.backend.core.db import get_db_context
 from vcore.backend.core.huey import huey_default, huey_reserved
-from vcore.backend.jobs.execute_job import hook_get_script_class_from_class_name
+from vcore.backend.jobs.execute_scheduler import check_repeat_schedulers
 from vcore.backend.logic.jobs import push_jobs_to_websocket
-from vcore.backend.tasks.execute_scheduler import check_repeat_schedulers
 
 
 def _trigger_next_queued_job(queue_name: str) -> None:
@@ -143,7 +143,7 @@ def _run_script_job(db_job: models.Job) -> None:
         log_file.write(f"meta: \n{json.dumps(db_job.meta, indent=4)}\n")
         log_file.write("----------------------------------------\n\n")
 
-        # Get scripts from the app: vcore.backend.jobs.execute_job.py via hook
+        # Get scripts from the app: app.jobs.execute_job.py via hook
         script_class = hook_get_script_class_from_class_name(script_class_name=script_class_name)
 
         try:

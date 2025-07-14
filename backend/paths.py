@@ -2,6 +2,8 @@
 import os
 from pathlib import Path
 
+from vcore.backend.core.settings import get_settings
+
 
 def convert_relative_path_to_absolute(path: str) -> Path:  # TODO: Move to vcore.backend.paths
     if str(path).startswith("/app/"):
@@ -62,8 +64,21 @@ for env_file_path in ENV_FILES_PATHS:
         ENV_FILE = env_file_path
         break
 
+# Load ENV File - Needed for Settings
+settings = get_settings(env_file_path=str(ENV_FILE))
+
 # Files
-# DATABASE_FILE = DATA_PATH / "database.sqlite3"
+DEFAULT_DATABASE_FILE = DATA_PATH / "database.sqlite3"
+DB_URL = settings.DB_URL or f"sqlite:///{DEFAULT_DATABASE_FILE}"
 PYPROJECT_FILE = PROJECT_PATH / "pyproject.toml"
 LOG_FILE = LOGS_PATH / "log.log"
 ERROR_LOG_FILE = LOGS_PATH / "error_log.log"
+
+
+# Job Queue Paths
+HUEY_DEFAULT_DB_PATH = convert_relative_path_to_absolute(settings.HUEY_DEFAULT_SQLITE_PATH)
+HUEY_RESERVED_DB_PATH = convert_relative_path_to_absolute(settings.HUEY_RESERVED_SQLITE_PATH)
+HUEY_DEFAULT_LOG_PATH = convert_relative_path_to_absolute(settings.HUEY_DEFAULT_LOG_PATH)
+HUEY_RESERVED_LOG_PATH = convert_relative_path_to_absolute(settings.HUEY_RESERVED_LOG_PATH)
+HUEY_DEFAULT_PID_FILE = HUEY_DEFAULT_LOG_PATH.with_suffix(".pid")
+HUEY_RESERVED_PID_FILE = HUEY_RESERVED_LOG_PATH.with_suffix(".pid")
