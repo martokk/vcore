@@ -1,10 +1,17 @@
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from pydantic import EmailStr, validator
 from pydantic_settings import BaseSettings
 
+from vcore.backend.core.env import load_env
+
 
 class PythonFastAPIBaseSettings(BaseSettings):
+    """
+    Base vCore Framework settings; loaded from environment variables or .env file.
+    """
+
     # Environment Settings #
     ENV_NAME: str = "invalid_default_value"
     DEBUG: bool = True
