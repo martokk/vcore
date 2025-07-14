@@ -1,10 +1,7 @@
-from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from pydantic import EmailStr, validator
 from pydantic_settings import BaseSettings
-
-from vcore.backend.core.env import load_env
 
 
 class PythonFastAPIBaseSettings(BaseSettings):
@@ -23,7 +20,7 @@ class PythonFastAPIBaseSettings(BaseSettings):
     LOG_LEVEL: str = "INFO"
 
     # Database
-    DB_URL: str = "sqlite:///"
+    DB_URL: str | None = None
     DATABASE_ECHO: bool = False
 
     # Huey Job Queue

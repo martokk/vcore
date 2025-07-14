@@ -3,14 +3,12 @@ from typing import Any
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
 from sqlmodel import Session
-
-from app import crud as app_crud, logger
-from app.logic.file_management import get_trained_lora_safetensors
-from app.models import settings
 from vcore.backend import crud
 from vcore.backend.core.db import get_db
 from vcore.backend.templating import templates
 from vcore.backend.templating.context import get_template_context
+
+from app.models import settings
 
 
 router = APIRouter(tags=["jobs"])
@@ -49,23 +47,5 @@ async def jobs_page(
     )
 
     context["jobs"] = sorted_jobs
-
-    try:
-        characters = await app_crud.character.get_all(db=db)
-    except Exception as e:
-        logger.error(f"Error fetching characters: {str(e)}")
-        characters = []
-
-    try:
-        sd_checkpoints = await app_crud.sd_checkpoint.get_all(db=db)
-    except Exception as e:
-        logger.error(f"Error fetching checkpoints: {str(e)}")
-        sd_checkpoints = []
-
-    context["characters"] = characters or []
-    context["sd_checkpoints"] = sd_checkpoints or []
-
-    # Script Hooks
-    context["trained_lora_safetensors"] = get_trained_lora_safetensors() or []
 
     return templates.TemplateResponse("jobs/jobs.html", context)

@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 from sqlmodel import Session, SQLModel, create_engine
 
-from app import logger, settings
+from app import logger, paths, settings
 from app.logic.init_db import (
     initialize_project_specific_data as _initialize_project_specific_data,
 )
@@ -15,9 +15,11 @@ from vcore.backend import crud, models
 
 
 engine = create_engine(
-    url=settings.DB_URL,
+    url=paths.DB_URL,
     echo=settings.DATABASE_ECHO,
-    # connect_args={"check_same_thread": False},  # For SQLite / Not for PostgreSQL
+    connect_args={
+        "check_same_thread": "sqlite" not in paths.DB_URL
+    },  # =False for SQLite / NOT for PostgreSQL
     pool_pre_ping=True,
     poolclass=QueuePool,
     pool_size=20,

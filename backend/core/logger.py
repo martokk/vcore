@@ -1,29 +1,31 @@
+from pathlib import Path
 from typing import Any
 
 from loguru import logger as _logger
 
-from app.models.settings import Settings
-from app.paths import ERROR_LOG_FILE, LOG_FILE
 
-
-def setup_logger(settings: Settings) -> Any:
+def setup_logger(
+    error_log_file_path: Path,
+    log_file_path: Path,
+    log_level: str,
+) -> Any:
     """Configure and return the application logger."""
 
     # Configure loggers for file output
     _logger.add(
-        LOG_FILE,
+        log_file_path,
         filter=lambda record: record["extra"].get("name") == "logger",
-        level=settings.LOG_LEVEL,
+        level=log_level,
         rotation="10 MB",
     )
     _logger.add(
-        ERROR_LOG_FILE,
+        error_log_file_path,
         filter=lambda record: record["extra"].get("name") == "logger",
         level="ERROR",
         rotation="10 MB",
     )
     # Create bound logger
     logger = _logger.bind(name="logger")
-    logger.info(f"Log level set by .env to '{settings.LOG_LEVEL}'")
+    logger.info(f"Log level set by .env to '{log_level}'")
 
     return logger
