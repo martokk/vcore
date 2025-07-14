@@ -26,19 +26,16 @@ alwaysApply: false
 
 ```
 frontend/static/css/
-├── components/           # Reusable component styles
-│   ├── buttons.css       # Button styles (e.g. btn-primary, btn-secondary, etc.)
-│   ├── cards.css         # Card styles (e.g. card-dashboard, card-profile, etc.)
-│   └── forms.css         # Form styles (e.g. form-control, form-select, etc.)
-├── vcore/               # vCore Framework styles
-│   ├── easymde-theme.css # EasyMDE theme
-│   ├── sidebar.css       # Sidebar styles
-│   ├── text-colors.css   # Text colors
-│   ├── theme.css         # vCore Theme styles
-│   ├── tomselect.css     # TomSelect styles
-│   └── variables.css     # CSS variables
 ├── styles.css           # Main entry point for all styles
 └── theme.css            # Project-specific theme styles
+
+vcore/frontend/static/css/
+├── easymde-theme.css # EasyMDE theme
+├── sidebar.css       # Sidebar styles
+├── text-colors.css   # Text colors
+├── theme.css         # vCore Theme styles
+├── tomselect.css     # TomSelect styles
+└── variables.css     # CSS variables
 ```
 
 ## Examples

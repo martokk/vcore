@@ -3,6 +3,16 @@ import os
 from pathlib import Path
 
 
+def convert_relative_path_to_absolute(path: str) -> Path:  # TODO: Move to vcore.backend.paths
+    if str(path).startswith("/app/"):
+        joined_path = f"{PROJECT_PATH}{path}"
+        return Path(joined_path)
+    if str(path).startswith("app/"):
+        joined_path = f"{PROJECT_PATH}/{path}"
+        return Path(joined_path)
+    return Path(path)
+
+
 # Project Path
 PROJECT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
 
@@ -13,11 +23,17 @@ VCORE_PATH = PROJECT_PATH / "vcore"
 # Folders
 DATA_PATH = PROJECT_PATH / "data"
 FRONTEND_PATH = PROJECT_PATH / "frontend"
+VCORE_FRONTEND_PATH = VCORE_PATH / "frontend"
 
 # Frontend Folder
 STATIC_PATH = FRONTEND_PATH / "static"
+VCORE_STATIC_PATH = VCORE_FRONTEND_PATH / "static"
+
 EMAIL_TEMPLATES_PATH = FRONTEND_PATH / "email-templates"
+VCORE_EMAIL_TEMPLATES_PATH = VCORE_FRONTEND_PATH / "email-templates"
+
 TEMPLATES_PATH = FRONTEND_PATH / "templates"
+VCORE_TEMPLATES_PATH = VCORE_FRONTEND_PATH / "templates"
 
 # Data Folder
 LOGS_PATH = DATA_PATH / "logs"

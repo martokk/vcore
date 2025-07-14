@@ -139,7 +139,7 @@ Invalid concise example with explanation
 
 - **Folder Location**: `/.cursor/rules/[vcore|project]/standards/ui_ux/`
 - **Prefix**: `15XX`
-- **Common Glob Patterns**: `frontend/templates/**/*.html`, `frontend/static/**/*`
+- **Common Glob Patterns**: `frontend/templates/**/*.html`, `frontend/static/**/*`, `vcore/frontend/templates/**/*.html`, `vcore/frontend/static/**/*`
 
 ### Language Rules
 
@@ -158,7 +158,7 @@ Invalid concise example with explanation
 
 - **Folder Location**: `/.cursor/rules/[vcore|project]/languages/javascript/`
 - **Prefix**: `22XX`
-- **Common Glob Patterns**: `frontend/static/js/**/*.js`
+- **Common Glob Patterns**: `frontend/static/js/**/*.js`, `vcore/frontend/static/js/**/*.js`
 
 #### HTML
 
@@ -170,7 +170,7 @@ Invalid concise example with explanation
 
 - **Folder Location**: `/.cursor/rules/[vcore|project]/languages/css/`
 - **Prefix**: `24XX`
-- **Common Glob Patterns**: `frontend/templates/**/*.html`, `frontend/static/css/**/*.css`
+- **Common Glob Patterns**: `frontend/templates/**/*.html`, `frontend/static/css/**/*.css`, `vcore/frontend/templates/**/*.html`, `vcore/frontend/static/css/**/*.css`
 
 ### Framework Rules
 

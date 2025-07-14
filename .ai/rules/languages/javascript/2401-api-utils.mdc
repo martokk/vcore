@@ -26,7 +26,7 @@ alwaysApply: false
 
 <example>
 // Good: Proper initialization and usage of api_utils.js
-import { initializeApi, apiCrud, uiHelpers } from '/static/js/api_utils.js';
+import { initializeApi, apiCrud, uiHelpers } from '/vcore/static/js/api_utils.js';
 
 // Initialize API with authentication tokens
 initializeApi({
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ```javascript
 // Initialize API with authentication tokens
-import { initializeApi } from '/static/js/api_utils.js';
+import { initializeApi } from '/vcore/static/js/api_utils.js';
 
 initializeApi({
     access_token: "{{ tokens.access_token }}",
@@ -178,7 +178,7 @@ initializeApi({
 ### 2. CRUD Operations
 
 ```javascript
-import { apiCrud } from '/static/js/api_utils.js';
+import { apiCrud } from '/vcore/static/js/api_utils.js';
 
 // Create
 await apiCrud.create('entity_plural', data);
@@ -199,7 +199,7 @@ await apiCrud.delete('entity_plural', id);
 ### 3. Toast Notifications
 
 ```javascript
-import { uiHelpers } from '/static/js/api_utils.js';
+import { uiHelpers } from '/vcore/static/js/api_utils.js';
 
 // Form Handling
 uiHelpers.initializeForm('formId', initialData);

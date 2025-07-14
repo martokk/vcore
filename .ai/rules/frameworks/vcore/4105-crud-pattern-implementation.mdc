@@ -261,7 +261,7 @@ def update(id: int, data: dict, db: Session = Depends(get_db)):
 
 {% block js_scripts %}
 <script type="module">
-    import { initializeApi, apiCrud, uiHelpers } from '/static/js/api_utils.js';
+    import { initializeApi, apiCrud, uiHelpers } from '/vcore/static/js/api_utils.js';
 
     // Initialize API with tokens
     initializeApi({

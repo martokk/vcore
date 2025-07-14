@@ -182,7 +182,7 @@ async def quick_tool_api_endpoint(
 
 {% block js_scripts %}
 <script type="module">
-    import { FormProcessor } from '/static/js/form_processor.js';
+    import { FormProcessor } from '/vcore/static/js/form_processor.js';
     
     FormProcessor.initializeForm({
         formId: 'quickToolForm',

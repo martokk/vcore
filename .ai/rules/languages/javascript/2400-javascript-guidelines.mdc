@@ -48,7 +48,7 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 // Usage
-import { toast } from '/static/js/toast.js';
+import { toast } from '/vcore/static/js/toast.js';
 
 try {
     const data = await apiRequest('/api/users');
@@ -260,7 +260,7 @@ DataTable.initialize('userTable', {
 
 ```javascript
 // Use the shared API utilities
-import { initializeApi, apiCrud, uiHelpers } from '/static/js/api_utils.js';
+import { initializeApi, apiCrud, uiHelpers } from '/vcore/static/js/api_utils.js';
 
 // Initialize API with tokens
 initializeApi({
