@@ -13,10 +13,10 @@ from huey import crontab
 from sqlmodel import Session
 
 from app import logger, paths, settings
-from app.tasks.execute_tasks import hook_get_script_class_from_class_name
 from vcore.backend import crud, models
 from vcore.backend.core.db import get_db_context
 from vcore.backend.core.huey import huey_default, huey_reserved
+from vcore.backend.jobs.execute_job import hook_get_script_class_from_class_name
 from vcore.backend.logic.jobs import push_jobs_to_websocket
 from vcore.backend.tasks.execute_scheduler import check_repeat_schedulers
 
@@ -57,7 +57,7 @@ def _trigger_next_queued_job(queue_name: str) -> None:
         )
 
         # Enqueue the job for execution in Huey
-        _execute_job_task(job_id=str(next_job.id), priority=priority_order[next_job.priority])
+        _execute_job(job_id=str(next_job.id), priority=priority_order[next_job.priority])
 
 
 def _run_command_job(db: Session, db_job: models.Job, command: str | None = None) -> None:
@@ -143,7 +143,7 @@ def _run_script_job(db_job: models.Job) -> None:
         log_file.write(f"meta: \n{json.dumps(db_job.meta, indent=4)}\n")
         log_file.write("----------------------------------------\n\n")
 
-        # Get scripts from the app: app.tasks.execute_tasks.py via hook
+        # Get scripts from the app: vcore.backend.jobs.execute_job.py via hook
         script_class = hook_get_script_class_from_class_name(script_class_name=script_class_name)
 
         try:
@@ -190,7 +190,7 @@ def _safe_push_jobs_to_websocket(context_msg: str = "") -> None:
         logger.error(f"[WebSocket] Failed to push jobs to websocket. {context_msg} Error: {e}")
 
 
-def _execute_job_task(job_id: str, priority: int = 100) -> None:
+def _execute_job(job_id: str, priority: int = 100) -> None:
     """
     Huey task to execute a job and update its status.
     This is the entry point for background job execution.
@@ -418,13 +418,13 @@ def _spawn_recurring_jobs(queue_name: str) -> None:
 
 
 @huey_default.task()
-def execute_job_task_default(job_id: str, priority: int = 100) -> None:
-    _execute_job_task(job_id=job_id, priority=priority)
+def execute_job_default(job_id: str, priority: int = 100) -> None:
+    _execute_job(job_id=job_id, priority=priority)
 
 
 @huey_reserved.task()
-def execute_job_task_reserved(job_id: str, priority: int = 100) -> None:
-    _execute_job_task(job_id=job_id, priority=priority)
+def execute_job_reserved(job_id: str, priority: int = 100) -> None:
+    _execute_job(job_id=job_id, priority=priority)
 
 
 @huey_default.periodic_task(crontab(minute="*/1"))  # Check every 1 minute

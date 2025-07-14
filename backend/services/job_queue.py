@@ -34,14 +34,14 @@ CONSUMERS: list[HueyConsumerWorker] = [
         db_path=paths.HUEY_DEFAULT_DB_PATH,
         log_path=paths.HUEY_DEFAULT_LOG_PATH,
         pid_file=paths.HUEY_DEFAULT_PID_FILE,
-        huey_module="app.tasks.huey_default",
+        huey_module="vcore.backend.jobs.huey_default",
     ),
     HueyConsumerWorker(
         name="reserved",
         db_path=paths.HUEY_RESERVED_DB_PATH,
         log_path=paths.HUEY_RESERVED_LOG_PATH,
         pid_file=paths.HUEY_RESERVED_PID_FILE,
-        huey_module="app.tasks.huey_reserved",
+        huey_module="vcore.backend.jobs.huey_reserved",
     ),
 ]
 
