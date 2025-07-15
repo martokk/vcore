@@ -1,6 +1,6 @@
 """
 This service manages the job queue, providing an interface to add,
-view, and manage jobs in a persistent, file-based database (TinyDB).
+view, and manage jobs.
 """
 
 import asyncio
@@ -13,6 +13,10 @@ from typing import Any
 
 from pydantic import BaseModel
 from sqlmodel import Session
+
+from app import logger
+from vcore.backend import crud, models, paths
+from vcore.backend.services.job_queue_ws_manager import job_queue_ws_manager
 
 from app import logger
 from vcore.backend import crud, models, paths
