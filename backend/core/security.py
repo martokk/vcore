@@ -7,8 +7,7 @@ from fastapi.security import HTTPBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from sqlmodel import Session
 
-from app import settings
-from vcore.backend import crud, models
+from backend import crud, models, settings
 
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

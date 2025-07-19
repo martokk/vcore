@@ -1,0 +1,428 @@
+/* === Variables === */
+:root {
+    --v-base: #181b1d;
+
+    --v-base-dark-5: color-mix(in srgb, var(--v-base) 95%, black);
+    --v-base-dark-10: color-mix(in srgb, var(--v-base) 90%, black);
+    --v-base-dark-15: color-mix(in srgb, var(--v-base) 85%, black);
+    --v-base-dark-20: color-mix(in srgb, var(--v-base) 80%, black);
+    --v-base-dark-25: color-mix(in srgb, var(--v-base) 75%, black);
+    --v-base-dark-30: color-mix(in srgb, var(--v-base) 70%, black);
+    --v-base-dark-35: color-mix(in srgb, var(--v-base) 65%, black);
+    --v-base-dark-40: color-mix(in srgb, var(--v-base) 60%, black);
+    --v-base-dark-45: color-mix(in srgb, var(--v-base) 55%, black);
+    --v-base-dark-50: color-mix(in srgb, var(--v-base) 50%, black);
+    --v-base-dark-55: color-mix(in srgb, var(--v-base) 45%, black);
+    --v-base-dark-60: color-mix(in srgb, var(--v-base) 40%, black);
+    --v-base-dark-65: color-mix(in srgb, var(--v-base) 35%, black);
+    --v-base-dark-70: color-mix(in srgb, var(--v-base) 30%, black);
+    --v-base-dark-75: color-mix(in srgb, var(--v-base) 25%, black);
+    --v-base-dark-80: color-mix(in srgb, var(--v-base) 20%, black);
+    --v-base-dark-85: color-mix(in srgb, var(--v-base) 15%, black);
+    --v-base-dark-90: color-mix(in srgb, var(--v-base) 10%, black);
+    --v-base-dark-95: color-mix(in srgb, var(--v-base) 5%, black);
+
+    --v-base-light-5: color-mix(in srgb, var(--v-base) 95%, white);
+    --v-base-light-10: color-mix(in srgb, var(--v-base) 90%, white);
+    --v-base-light-15: color-mix(in srgb, var(--v-base) 85%, white);
+    --v-base-light-20: color-mix(in srgb, var(--v-base) 80%, white);
+    --v-base-light-25: color-mix(in srgb, var(--v-base) 75%, white);
+    --v-base-light-30: color-mix(in srgb, var(--v-base) 70%, white);
+    --v-base-light-35: color-mix(in srgb, var(--v-base) 65%, white);
+    --v-base-light-40: color-mix(in srgb, var(--v-base) 60%, white);
+    --v-base-light-45: color-mix(in srgb, var(--v-base) 55%, white);
+    --v-base-light-50: color-mix(in srgb, var(--v-base) 50%, white);
+    --v-base-light-55: color-mix(in srgb, var(--v-base) 45%, white);
+    --v-base-light-60: color-mix(in srgb, var(--v-base) 40%, white);
+    --v-base-light-65: color-mix(in srgb, var(--v-base) 35%, white);
+    --v-base-light-70: color-mix(in srgb, var(--v-base) 30%, white);
+    --v-base-light-75: color-mix(in srgb, var(--v-base) 25%, white);
+    --v-base-light-80: color-mix(in srgb, var(--v-base) 20%, white);
+    --v-base-light-85: color-mix(in srgb, var(--v-base) 15%, white);
+    --v-base-light-90: color-mix(in srgb, var(--v-base) 10%, white);
+    --v-base-light-95: color-mix(in srgb, var(--v-base) 5%, white);
+}
+
+/* Theme Colors */
+.bg-user {
+    background-color: rgb(0, 109, 128) !important;
+}
+
+.bg-user-dev {
+    background-color: rgb(0, 111, 20) !important;
+}
+
+.bg-admin {
+    background-color: rgb(73, 0, 128) !important;
+}
+
+.bg-admin-dev {
+    background-color: rgb(83, 0, 156) !important;
+}
+
+
+
+
+
+/* Default styles */
+.container-fluid {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+/* Medium screen (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container-fluid {
+        max-width: 720px;
+    }
+}
+
+/* Large screens (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container-fluid {
+        max-width: 960px;
+    }
+}
+
+/* Extra large screens (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container-fluid {
+        max-width: 1140px;
+    }
+}
+
+.modal-xl {
+    --bs-modal-width: 1400px;
+}
+
+.navbar-nav .dropdown-menu {
+    z-index: 2000 !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.d-flex.flex-column {
+    min-height: 100%;
+}
+
+.container-fluid.mt-3.mb-5 {
+    flex: 1;
+}
+
+
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent);
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Accent Colors */
+.accent {
+    color: var(--accent) !important;
+}
+
+.accent-subtle {
+    color: var(--accent-subtle) !important;
+}
+
+.bg-accent {
+    background-color: var(--accent) !important;
+}
+
+.bg-accent-subtle {
+    background-color: var(--accent-subtle) !important;
+}
+
+.border-accent {
+    border-color: var(--accent) !important;
+}
+
+.border-accent-subtle {
+    border-color: var(--accent-subtle) !important;
+}
+
+.text-accent {
+    color: var(--accent) !important;
+}
+
+.text-accent-light {
+    color: var(--accent-light) !important;
+}
+
+.text-accent-subtle {
+    color: var(--accent-subtle) !important;
+}
+
+
+
+/* Cards */
+.card-header {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.card {
+    border-color: var(--v-base-light-20);
+}
+
+/* Accordion */
+
+.accordion-item {
+    border: var(--bs-accordion-border-width) solid #d3d3d3 !important;
+    padding: 0.3rem !important;
+}
+
+.accordion-button,
+.accordion-button:not(.collapsed) {
+    color: var(--accent) !important;
+    background-color: var(--bs-card-cap-bg);
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    font-weight: bold !important;
+}
+
+/* Modals */
+.modal-content {
+    border-color: var(--accent) !important;
+}
+
+.modal-header {
+    font-weight: bold !important;
+    color: var(--accent) !important;
+    border: none !important;
+}
+
+.modal-body {
+    border: none !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+/* Buttons */
+.btn-dark {
+    background-color: var(--v-base-light-5) !important;
+    border: solid 1px var(--v-base-light-20) !important;
+    color: var(--v-base-light-90) !important;
+}
+
+
+
+
+/* === Compact Global Resets === */
+
+body,
+.card,
+.card-body,
+.table,
+.form-control,
+.form-select,
+.navbar,
+.nav-link,
+.list-group-item,
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer,
+.dropdown-item,
+.accordion-button,
+.alert,
+.btn {
+    font-size: 0.85rem !important;
+    line-height: 1.2 !important;
+}
+
+/* === Cards === */
+
+.card {
+    padding: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.card-body {
+    padding: 0.3rem !important;
+}
+
+.card-title,
+.card-text {
+    margin-bottom: 0.25rem !important;
+}
+
+/* === Forms === */
+
+.form-label {
+    margin-bottom: 0.25rem !important;
+}
+
+.form-control,
+.form-select {
+    padding: 0.25rem 0.375rem !important;
+    /* height: auto !important; */
+}
+
+.form-group {
+    margin-bottom: 0.5rem !important;
+}
+
+input,
+select,
+textarea {
+    line-height: 1.2 !important;
+}
+
+.input-group-text {
+    padding: 0.1rem 0.75rem !important;
+}
+
+/* === Buttons === */
+
+.btn {
+    padding: 0.25rem 0.5rem !important;
+    line-height: 1.2 !important;
+}
+
+/* === Tables === */
+
+.table td,
+.table th {
+    padding: 0.25rem 0.5rem !important;
+    vertical-align: middle !important;
+}
+
+.table {
+    margin-bottom: 0.5rem !important;
+}
+
+/* === Navbar === */
+
+.navbar {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+}
+
+.navbar .nav-link {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* === List Groups === */
+
+.list-group-item {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* === Accordion === */
+
+.accordion-button {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* === Modals === */
+
+.modal-backdrop {
+    --bs-backdrop-opacity: 0.80 !important;
+}
+
+.modal-content {
+    padding: 0.5rem !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 0.5rem !important;
+}
+
+/* === Dropdowns === */
+
+.dropdown-menu {
+    padding: 0.25rem 0 !important;
+}
+
+.dropdown-item {
+    padding: 0.25rem 0.75rem !important;
+}
+
+/* === Alerts === */
+
+.alert {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* === Typography === */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* Headings */
+h1 {
+    font-size: 1.625rem;
+}
+
+h2 {
+    font-size: 1.375rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+h6 {
+    font-size: 0.875rem
+}
+
+
+/* Row */
+.row {
+    --bs-gutter-x: 0.75rem !important;
+}
+
+.card-header {
+    font-weight: bold !important;
+    margin-bottom: 0.25rem !important;
+}

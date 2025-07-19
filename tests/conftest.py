@@ -10,10 +10,11 @@ from httpx import AsyncClient, Cookies
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import Session, SQLModel, create_engine
 from starlette.datastructures import URL
-from vcore.backend import crud, models, settings
-from vcore.backend.app import app
-from vcore.backend.core import security
-from vcore.backend.core.db import get_db, initialize_tables_and_initial_data
+
+from app.app import app
+from backend import crud, models, settings
+from backend.core import security
+from backend.core.db import get_db, initialize_tables_and_initial_data
 
 
 # Set up the database
@@ -48,7 +49,7 @@ def do_begin(conn: Any) -> None:
 
 
 @pytest.fixture(name="db")
-async def fixture_db(init: Any) -> AsyncGenerator[Session, None]:  # pylint: disable=unused-argument
+async def fixture_db() -> AsyncGenerator[Session, None]:  # pylint: disable=unused-argument
     connection = engine.connect()
     transaction = connection.begin()
     db = TestingSessionLocal(bind=connection)

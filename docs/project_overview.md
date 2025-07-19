@@ -91,7 +91,7 @@ Application behavior is controlled by environment variables defined in `app/mode
 | :--- | :--- | :--- |
 | `ENV_NAME` | The name of the current environment. **Required**. | `dev`, `local`, `host`, `playground` |
 | `DB_URL` | The SQLAlchemy database connection string. | `sqlite:///./app/data/database.sqlite3` |
-| `PROJECT_NAME` | The name of the project. | `vcore-app` |
+| `PROJECT_NAME` | The name of the project. | `vcore` |
 | `FIRST_SUPERUSER_USERNAME` | Username for the initial superuser account. | `admin` |
 | `FIRST_SUPERUSER_PASSWORD` | Password for the initial superuser account. | `changeme` |
 | `FIRST_SUPERUSER_EMAIL` | Email for the initial superuser account. | `admin@example.com` |

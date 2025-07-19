@@ -1,0 +1,12 @@
+/* Variables */
+@import url('vcore/variables.css');
+
+/* vCore */
+@import url('vcore/text-colors.css');
+@import url('vcore/tomselect.css');
+@import url('vcore/inline-editor.css');
+@import url('vcore/sidebar.css');
+@import url('vcore/theme.css');
+
+/* Project */
+@import url('theme.css');

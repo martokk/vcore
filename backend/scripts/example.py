@@ -1,29 +1,58 @@
+import time
 from typing import Any
 
-from vcore.backend.services.scripts import Script, ScriptOutput
+from backend import logger
+from backend.services.scripts import Script, ScriptOutput
 
 
-class ExampleScript(Script):
+class ScriptExample(Script):
     """
-    This example inputs a number and doubles it.
+    This is an example script.
 
+    It uses the following parameters:
+    - input_text: A string to validate.
     """
 
-    def _validate_input(self, num: Any) -> bool:
-        if not num:
-            raise ValueError("Script Validation Error: A input value is required for `num`.")
+    def _validate_input(self, *args: Any, **kwargs: Any) -> bool:
+        """
+        Validate the input.
 
-        if not isinstance(num, int):
-            raise ValueError("Script Validation Error: `num` must be an integer.")
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
 
-        if num < 0:
-            raise ValueError("Script Validation Error: `num` must be greater than 0.")
-
+        Returns:
+            bool: True if the input is valid, False otherwise.
+        """
+        if not kwargs.get("input_text"):
+            logger.error("input_text is required")
+            return False
+        if kwargs.get("input_text") == "fail":
+            logger.error("input_text is 'fail'")
+            return False
         return True
 
-    def _run(self, num: int) -> ScriptOutput:  # noqa: F821
+    def _run(self, *args: Any, **kwargs: Any) -> Any:
+        """
+        Run the script.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        """
+        logger.debug(f"Starting {self.__class__.__name__}._run()")
+        logger.debug(f"kwargs: {kwargs}")
+
+        # DO SOMETHING
+        range_messages = []
+        for i in range(10):
+            range_messages.append(f"Hello World {i}")
+            time.sleep(1)
+
         return ScriptOutput(
             success=True,
-            message=f"The number {num} doubled is {num * 2}.",
-            data={"doubled_num": num * 2},
+            message="Example script completed",
+            data={
+                "range_messages": range_messages,
+            },
         )

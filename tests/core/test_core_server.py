@@ -3,8 +3,8 @@ from unittest.mock import MagicMock, patch
 
 import uvicorn
 
-from app import settings
-from app.core.server import start_server
+from backend import settings
+from backend.core.server import start_server
 
 
 def test_start_server_host_port(monkeypatch: MagicMock) -> None:

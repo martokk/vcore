@@ -9,15 +9,14 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from fastapi.responses import JSONResponse, PlainTextResponse
 from sqlmodel import Session
 
-from app import paths, settings
-from vcore.backend import crud, models
-from vcore.backend.core.db import get_db
-from vcore.backend.services.job_queue import (
+from backend import crud, models, paths, settings
+from backend.core.db import get_db
+from backend.services.job_queue import (
     kill_job_process,
     start_consumer_process,
     stop_consumer_process,
 )
-from vcore.backend.services.job_queue_ws_manager import job_queue_ws_manager
+from backend.services.job_queue_ws_manager import job_queue_ws_manager
 
 
 router = APIRouter(prefix="/jobs", tags=["Job Queue"])
@@ -31,7 +30,7 @@ async def create_job(db: Session = Depends(get_db), job_in: models.Job = Body(..
     try:
         return await crud.job.create(db, obj_in=job_in)
     except Exception as e:
-        from app import logger
+        from backend import logger
 
         logger.error(f"Failed to create job: {e}")
         raise HTTPException(status_code=500, detail="Failed to create job.")
@@ -61,7 +60,7 @@ async def delete_job(job_id: str, db: Session = Depends(get_db)) -> None:
     try:
         return await crud.job.remove(db, id=job_id)
     except Exception as e:
-        from app import logger
+        from backend import logger
 
         logger.error(f"Failed to delete job {job_id}: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to delete job {job_id}.")
@@ -72,7 +71,7 @@ async def push_jobs_to_websocket_endpoint(db: Session = Depends(get_db)) -> None
     """
     Push all jobs to the websocket.
     """
-    from app import logger
+    from backend import logger
 
     try:
         jobs = await crud.job.get_all_jobs_for_env_name(db, env_name=settings.ENV_NAME)
@@ -99,7 +98,7 @@ async def update_job(
     try:
         return await crud.job.update(db, id=job_id, obj_in=job_in)
     except Exception as e:
-        from app import logger
+        from backend import logger
 
         logger.error(f"Failed to update job {job_id}: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to update job {job_id}.")
@@ -113,7 +112,7 @@ async def update_job_status(
     Update the status of a job and broadcast the update to websocket clients.
     Expects a JSON body: {"status": "running"}
     """
-    from app import logger
+    from backend import logger
 
     status_value = body.get("status")
     if not status_value:

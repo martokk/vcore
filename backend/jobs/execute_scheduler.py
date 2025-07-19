@@ -1,8 +1,7 @@
 from sqlmodel import Session
 
-from app import logger, settings
-from vcore.backend import crud, models
-from vcore.backend.core.db import get_db_context
+from backend import crud, logger, models, settings
+from backend.core.db import get_db_context
 
 
 def _create_job_from_scheduler(db: Session, scheduler: models.JobScheduler) -> None:

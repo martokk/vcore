@@ -2,10 +2,11 @@
 import os
 from pathlib import Path
 
-from vcore.backend.core.settings import get_settings
+from backend.core.settings import get_settings
+from backend.models.settings import PythonFastAPIBaseSettings
 
 
-def convert_relative_path_to_absolute(path: str) -> Path:  # TODO: Move to vcore.backend.paths
+def convert_relative_path_to_absolute(path: str) -> Path:  # TODO: Move to backend.paths
     if str(path).startswith("/app/"):
         joined_path = f"{PROJECT_PATH}{path}"
         return Path(joined_path)
@@ -16,7 +17,7 @@ def convert_relative_path_to_absolute(path: str) -> Path:  # TODO: Move to vcore
 
 
 # Project Path
-PROJECT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
+PROJECT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent
 
 # MAIN PATHS
 APP_PATH = PROJECT_PATH / "app"
@@ -63,9 +64,10 @@ for env_file_path in ENV_FILES_PATHS:
         print(f"Found ENV file at {env_file_path}")
         ENV_FILE = env_file_path
         break
+print(f"ENV_FILE: {ENV_FILE}")
 
 # Load ENV File - Needed for Settings
-settings = get_settings(env_file_path=str(ENV_FILE))
+settings = get_settings(settings_cls=PythonFastAPIBaseSettings, env_file_path=str(ENV_FILE))
 
 # Files
 DEFAULT_DATABASE_FILE = DATA_PATH / "database.sqlite3"

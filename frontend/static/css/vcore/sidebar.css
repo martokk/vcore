@@ -1,0 +1,256 @@
+:root {
+    --v-font-size-base: 14px;
+
+    --v-font-size-sm-1: calc(var(--v-font-size-base) - 1px);
+    --v-font-size-sm-2: calc(var(--v-font-size-base) - 2px);
+    --v-font-size-sm-3: calc(var(--v-font-size-base) - 3px);
+    --v-font-size-sm-4: calc(var(--v-font-size-base) - 4px);
+    --v-font-size-sm-5: calc(var(--v-font-size-base) - 5px);
+    --v-font-size-sm-6: calc(var(--v-font-size-base) - 6px);
+    --v-font-size-sm-7: calc(var(--v-font-size-base) - 7px);
+    --v-font-size-sm-8: calc(var(--v-font-size-base) - 8px);
+    --v-font-size-sm-9: calc(var(--v-font-size-base) - 9px);
+
+    --v-font-size-lg-1: calc(var(--v-font-size-base) + 1px);
+    --v-font-size-lg-2: calc(var(--v-font-size-base) + 2px);
+    --v-font-size-lg-3: calc(var(--v-font-size-base) + 3px);
+    --v-font-size-lg-4: calc(var(--v-font-size-base) + 4px);
+    --v-font-size-lg-5: calc(var(--v-font-size-base) + 5px);
+    --v-font-size-lg-6: calc(var(--v-font-size-base) + 6px);
+    --v-font-size-lg-7: calc(var(--v-font-size-base) + 7px);
+    --v-font-size-lg-8: calc(var(--v-font-size-base) + 8px);
+    --v-font-size-lg-9: calc(var(--v-font-size-base) + 9px);
+}
+
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 200px;
+    background-color: var(--v-base-dark-20) !important;
+    /* Bootstrap dark bg */
+    color: #dee2e6;
+    /* Bootstrap text-light */
+    font-size: var(--v-font-size-base);
+    font-family: system-ui, sans-serif;
+    z-index: 1000;
+}
+
+.with-sidebar {
+    margin-left: 200px !important;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.sidebar-menu li.header {
+    padding: 12px 23px;
+    font-size: var(--v-font-size-lg-1);
+    font-weight: 600;
+    color: #fff;
+    /* Bootstrap secondary text */
+    background-color: var(--accent-subtle);
+    /* Slightly darker */
+    letter-spacing: 0.5px;
+}
+
+/* Top-level item */
+.sidebar-menu>li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Top-level link */
+.sidebar-menu>li>a {
+    padding: 8px 8px 8px 15px !important;
+    display: flex;
+    align-items: center;
+    border-left: 3px solid transparent !important;
+    color: #ffffff;
+    font-weight: 500;
+    transition: background 0.2s ease, border-left-color 0.2s ease;
+}
+
+/* Icon styling */
+.sidebar-menu>li>a>.fa {
+    width: 20px !important;
+    margin-right: 10px !important;
+    text-align: center !important;
+    color: var(--v-base-light-80) !important;
+    /* Accent used in icon */
+}
+
+.sidebar-menu>li>a>.fa.fa-accent {
+    color: var(--accent) !important;
+}
+
+
+/* Hover and active top-level */
+.sidebar-menu>li.active>a {
+    background-color: var(--accent-subtle) !important;
+    color: #fff !important;
+}
+
+.sidebar-menu>li:hover>a {
+    color: #fff !important;
+    border-left-color: var(--accent) !important;
+}
+
+.sidebar-menu>li.active>a>i {
+    color: #fff !important;
+}
+
+/* Divider */
+.sidebar-menu .divider {
+    border-bottom: 1px solid var(--accent-subtle, #444);
+    margin: 0.5rem 0;
+    height: 0;
+    list-style: none;
+    width: 70%;
+    justify-self: left;
+    margin-left: 20px !important;
+}
+
+/* Submenu container */
+.sidebar-menu .treeview-menu {
+    list-style: none !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+    background: var(--v-base-light-5) !important;
+    /* Bootstrap body-secondary-dark */
+    display: none;
+}
+
+/* Show submenus for active treeviews */
+.sidebar-menu li.active>.treeview-menu {
+    display: block;
+}
+
+/* Submenu items */
+.sidebar-menu .treeview-menu>li>a {
+    padding: 5px 5px 5px 20px !important;
+    display: block !important;
+    font-size: var(--v-font-size-sm-1) !important;
+    color: #ffffff !important;
+    transition: color 0.2s ease !important;
+}
+
+/* Submenu hover/active */
+.sidebar-menu .treeview-menu>li>a:hover {
+    color: var(--accent) !important;
+}
+
+.sidebar-menu .treeview-menu>li>a:hover {
+    border-left: 3px solid var(--accent) !important;
+    margin-left: -3px !important;
+}
+
+/* Nested submenu spacing */
+.sidebar-menu .treeview-menu .treeview-menu {
+    padding-left: 15px !important;
+}
+
+/* Toggle arrow */
+.sidebar-menu li>a>.fa-angle-left {
+    margin-left: auto !important;
+    transition: transform 0.3s ease !important;
+    color: #ff0000 !important;
+}
+
+.sidebar-menu li.active>a>.fa-angle-left {
+    transform: rotate(-90deg) !important;
+}
+
+/* Labels, badges */
+.sidebar-menu li .label,
+.sidebar-menu li .badge {
+    margin-left: auto !important;
+    font-size: var(--v-font-size-sm-5) !important;
+    background: var(--accent) !important;
+    color: #000 !important;
+    padding: 2px 6px !important;
+    border-radius: 0.25rem !important;
+}
+
+/* General link styles */
+.sidebar-menu a {
+    color: inherit !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.sidebar-footer {
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    border-top: 1px solid var(--accent-dark) !important;
+    background-color: var(--v-base-dark-40) !important;
+    width: 100% !important;
+}
+
+.sidebar-icon {
+    position: relative !important;
+    color: var(--accent) !important;
+    font-size: var(--v-font-size-lg-8) !important;
+    padding: 5px !important;
+    transition: color 0.2s !important;
+}
+
+.sidebar-icon:hover {
+    color: var(--accent-light) !important;
+}
+
+.sidebar-icon .badge {
+    position: absolute !important;
+    top: -4px !important;
+    right: -9px !important;
+    background-color: var(--accent) !important;
+    color: #000 !important;
+    font-size: var(--v-font-size-sm-1) !important;
+    font-weight: bold !important;
+    border-radius: 50% !important;
+    padding: 2px 5px !important;
+    line-height: 1 !important;
+}
+
+.sidebar-badge-accent {
+    background-color: var(--accent);
+    color: #fff;
+    padding: 0.25em 0.5em;
+    border-radius: 1em;
+    font-size: var(--v-font-size-sm-5);
+    vertical-align: top;
+}
+
+.sidebar-flex-spacer {
+    flex-grow: 1;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+}
+
+.disabled {
+    font-style: italic;
+    /* cursor: not-allowed;
+    pointer-events: none; */
+    opacity: 0.25;
+}

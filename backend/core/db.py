@@ -1,4 +1,4 @@
-from collections.abc import Generator
+from collections.abc import Awaitable, Callable, Generator
 from contextlib import contextmanager
 from typing import Any
 
@@ -7,11 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 from sqlmodel import Session, SQLModel, create_engine
 
-from app import logger, paths, settings
-from app.logic.init_db import (
-    initialize_project_specific_data as _initialize_project_specific_data,
-)
-from vcore.backend import crud, models
+from backend import crud, logger, models, paths, settings
 
 
 engine = create_engine(
@@ -82,11 +78,17 @@ async def create_all(engine: Engine = engine, sqlmodel_create_all: bool = False)
     return
 
 
-async def initialize_tables_and_initial_data(db: Session, **kwargs: Any) -> None:
+async def initialize_tables_and_initial_data(
+    db: Session,
+    init_app_specific_data_func: Callable[..., Awaitable[None]] | None = None,
+    **kwargs: Any,
+) -> None:
     """Initialize database with initial data"""
 
+    # Create all tables
     await create_all(**kwargs)
 
+    # Create superuser
     superuser = await crud.user.get_or_none(db=db, username=settings.FIRST_SUPERUSER_USERNAME)
     if not superuser:
         user_create = models.UserCreateWithPassword(
@@ -97,4 +99,6 @@ async def initialize_tables_and_initial_data(db: Session, **kwargs: Any) -> None
         )
         superuser = await crud.user._create_with_password(db=db, obj_in=user_create)
 
-    await _initialize_project_specific_data(db=db)
+    # Initialize project specific data
+    if init_app_specific_data_func:
+        await init_app_specific_data_func(db=db)

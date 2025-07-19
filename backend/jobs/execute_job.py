@@ -12,13 +12,12 @@ import requests
 from huey import crontab
 from sqlmodel import Session
 
-from app import logger, paths, settings
-from app.jobs.job_type_scripts import hook_get_script_class_from_class_name
-from vcore.backend import crud, models
-from vcore.backend.core.db import get_db_context
-from vcore.backend.core.huey import huey_default, huey_reserved
-from vcore.backend.jobs.execute_scheduler import check_repeat_schedulers
-from vcore.backend.logic.jobs import push_jobs_to_websocket
+from backend import crud, logger, models, paths, settings
+from backend.core.db import get_db_context
+from backend.core.huey import huey_default, huey_reserved
+from backend.jobs.execute_scheduler import check_repeat_schedulers
+from backend.logic.jobs import push_jobs_to_websocket
+from backend.services.scripts import call_script
 
 
 def _trigger_next_queued_job(queue_name: str) -> None:
@@ -143,12 +142,13 @@ def _run_script_job(db_job: models.Job) -> None:
         log_file.write(f"meta: \n{json.dumps(db_job.meta, indent=4)}\n")
         log_file.write("----------------------------------------\n\n")
 
-        # Get scripts from the app: app.jobs.execute_job.py via hook
-        script_class = hook_get_script_class_from_class_name(script_class_name=script_class_name)
+        # Get script instance
+        script_instance = call_script(script_class_name=script_class_name, **db_job.meta)
 
+        # Run script
         try:
             db_job.meta["job_id"] = str(db_job.id)
-            script_output = script_class().run(**db_job.meta)
+            script_output = script_instance.run(**db_job.meta)
         except Exception as e:
             log_file.write(f"Error: {e}\n Traceback: {traceback.format_exc()}\n")
             raise e

@@ -1,6 +1,6 @@
 import uvicorn
 
-from app import logger, settings
+from backend import logger, settings
 
 
 def start_server() -> None:

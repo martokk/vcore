@@ -1,6 +1,6 @@
-from vcore.backend.core.logger import setup_logger
-from vcore.backend.models.settings import PythonFastAPIBaseSettings
-from vcore.backend.paths import ERROR_LOG_FILE, LOG_FILE
+from backend.core.logger import setup_logger
+from backend.models.settings import PythonFastAPIBaseSettings
+from backend.paths import ERROR_LOG_FILE, LOG_FILE
 
 
 settings = PythonFastAPIBaseSettings()

@@ -3,7 +3,7 @@ import time
 from collections.abc import Callable
 from typing import Any
 
-from app import logger
+from backend import logger
 
 
 def log_function_enter_exit(  # type: ignore

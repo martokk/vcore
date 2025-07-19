@@ -5,7 +5,7 @@ import pytest
 from sqlmodel import Field, Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
-from app.crud.base_ordered import BaseOrderedCRUD
+from backend.crud.base_ordered import BaseOrderedCRUD
 
 
 # Test Model

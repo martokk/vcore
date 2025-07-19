@@ -4,7 +4,7 @@ from typing import Any
 
 from fastapi import HTTPException
 
-from app import settings
+from backend import settings
 
 
 def restrict_to(*allowed_types: str) -> Callable[[Callable[..., Any]], Callable[..., Any]]:

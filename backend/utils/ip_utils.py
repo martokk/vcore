@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 from fastapi import Request
 
-from app import logger
+from backend import logger
 
 
 # Cache for CloudFront IP ranges

@@ -3,8 +3,7 @@ from typing import Annotated
 from fastapi import HTTPException, Security, status
 from fastapi.security.api_key import APIKeyHeader
 
-from app import settings
-from vcore.backend.core import logger
+from backend import logger, settings
 
 
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)

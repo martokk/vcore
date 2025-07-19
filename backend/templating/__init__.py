@@ -3,8 +3,8 @@ from typing import cast
 from fastapi.templating import Jinja2Templates
 from jinja2 import FileSystemLoader
 
-from app import paths
-from vcore.backend.templating.env import set_template_env
+from backend import paths
+from backend.templating.env import set_template_env
 
 
 def get_templates() -> Jinja2Templates:

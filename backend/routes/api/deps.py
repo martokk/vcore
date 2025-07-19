@@ -2,11 +2,10 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import Session
 
-from app import settings
-from vcore.backend import crud, models
-from vcore.backend.core import security
-from vcore.backend.core.db import get_db
-from vcore.backend.crud.exceptions import RecordNotFoundError
+from backend import crud, models, settings
+from backend.core import security
+from backend.core.db import get_db
+from backend.crud.exceptions import RecordNotFoundError
 
 
 # Configure OAuth2 with auto_error=False to allow public endpoints

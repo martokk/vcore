@@ -2,16 +2,16 @@ from datetime import datetime, timezone
 
 from fastapi.templating import Jinja2Templates
 
-from app import settings
-from app.templating.env import hook_inject_app_templating_env
-from vcore.backend.templating.filters import (
+from backend import settings
+from backend.core.hooks import call_hook
+from backend.templating.filters import (
     filter_humanize,
     filter_markdown,
     filter_nl2br,
     format_date,
 )
-from vcore.backend.utils.datetime import format_datetime, utc_to_local
-from vcore.backend.utils.git import get_git_branch
+from backend.utils.datetime import format_datetime, utc_to_local
+from backend.utils.git import get_git_branch
 
 
 def set_template_env(templates: Jinja2Templates) -> Jinja2Templates:
@@ -47,6 +47,6 @@ def set_template_env(templates: Jinja2Templates) -> Jinja2Templates:
     )
 
     # Inject app templating env (from app)
-    templates = hook_inject_app_templating_env(templates)
+    templates = call_hook("inject_app_templating_env", templates=templates)
 
     return templates

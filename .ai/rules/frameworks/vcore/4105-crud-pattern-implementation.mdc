@@ -36,7 +36,7 @@ from sqlmodel import Session
 
 from app import crud, models
 from app.routes.api.deps import get_current_active_user
-from app.core.db import get_db
+from backend.core.db import get_db
 
 router = APIRouter(prefix="/[entity_plural]", tags=["[Entity_plural]"])
 
@@ -128,9 +128,9 @@ from fastapi.responses import HTMLResponse
 from sqlmodel import Session
 
 from app import crud
-from vcore.backend.core.db import get_db
-from vcore.backend.templating import templates
-from vcore.backend.templating.context import get_template_context
+from backend.core.db import get_db
+from backend.templating import templates
+from backend.templating.context import get_template_context
 
 router = APIRouter(tags=["[entity_plural]"])
 

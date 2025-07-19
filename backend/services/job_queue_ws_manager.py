@@ -1,4 +1,4 @@
-from vcore.backend.core.websocket import WebSocketManager
+from backend.core.websocket import WebSocketManager
 
 
 class JobQueueConnectionManager(WebSocketManager):

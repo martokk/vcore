@@ -5,8 +5,8 @@ from sqlalchemy.sql.elements import BinaryExpression
 from sqlalchemy.sql.expression import func
 from sqlmodel import Session, SQLModel, select
 
-from app import logger
-from vcore.backend.crud.exceptions import DeleteError, RecordNotFoundError
+from backend import logger
+from backend.crud.exceptions import DeleteError, RecordNotFoundError
 
 
 ModelType = TypeVar("ModelType", bound=SQLModel)

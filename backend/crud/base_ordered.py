@@ -2,7 +2,7 @@ from typing import Any, TypeVar
 
 from sqlmodel import Session, SQLModel, col, select
 
-from vcore.backend.crud.base import BaseCRUD
+from backend.crud.base import BaseCRUD
 
 
 ModelType = TypeVar("ModelType", bound=SQLModel)

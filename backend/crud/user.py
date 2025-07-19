@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 
-from vcore.backend import models
-from vcore.backend.core import security
+from backend import models
+from backend.core import security
 
 from .base import BaseCRUD
 

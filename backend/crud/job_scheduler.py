@@ -3,9 +3,9 @@ from typing import Any
 
 from sqlmodel import Session
 
-from app import logger
-from vcore.backend.crud.base import BaseCRUD, BaseCRUDSync
-from vcore.backend.models import (
+from backend import logger
+from backend.crud.base import BaseCRUD, BaseCRUDSync
+from backend.models import (
     JobScheduler,
     JobSchedulerCreate,
     JobSchedulerTriggerType,

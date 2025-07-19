@@ -2,11 +2,10 @@ from fastapi import APIRouter, BackgroundTasks, Body, Depends, HTTPException, st
 from pydantic.networks import EmailStr
 from sqlmodel import Session
 
-from app import settings
-from vcore.backend import crud, models
-from vcore.backend.core import security
-from vcore.backend.routes.api import deps
-from vcore.backend.services import notify
+from backend import crud, models, settings
+from backend.core import security
+from backend.routes.api import deps
+from backend.services import notify
 
 
 router = APIRouter()

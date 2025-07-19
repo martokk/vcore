@@ -3,12 +3,11 @@ from typing import Any
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
 from sqlmodel import Session
-from vcore.backend import crud
-from vcore.backend.core.db import get_db
-from vcore.backend.templating import templates
-from vcore.backend.templating.context import get_template_context
 
-from app.models import settings
+from backend import crud, settings
+from backend.core.db import get_db
+from backend.templating import templates
+from backend.templating.context import get_template_context
 
 
 router = APIRouter(tags=["jobs"])

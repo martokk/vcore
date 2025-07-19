@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from vcore.backend.routes.api.v1.endpoints import job_queue_ws, job_scheduler, users
-from vcore.backend.routes.api.v1.endpoints.job_queue import router as job_queue_router
+from backend.routes.api.v1.endpoints import job_queue_ws, job_scheduler, users
+from backend.routes.api.v1.endpoints.job_queue import router as job_queue_router
 
 
 vcore_api_router = APIRouter()

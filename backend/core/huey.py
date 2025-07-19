@@ -2,7 +2,7 @@ from pathlib import Path
 
 from huey import SqliteHuey
 
-from app import paths
+from backend import paths
 
 
 # Create a Huey instance using the SQLite backend.

@@ -47,6 +47,7 @@ class PythonFastAPIBaseSettings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 10080
     ALGORITHM: str = "HS256"
+    EXPORT_API_KEY: str = "invalid_default_value"
 
     # Email
     SMTP_TLS: bool = True

@@ -5,7 +5,7 @@ import emails
 from emails.template import JinjaTemplate
 from loguru import logger as _logger
 
-from app import paths, settings
+from backend import paths, settings
 
 
 # Main Logger

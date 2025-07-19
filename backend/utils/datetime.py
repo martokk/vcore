@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from app import settings
+from backend import settings
 
 
 def parse_datetime(dt: str | datetime) -> datetime:

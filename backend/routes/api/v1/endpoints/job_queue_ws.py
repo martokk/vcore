@@ -2,12 +2,11 @@ import asyncio
 
 from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlmodel import Session
-from vcore.backend import crud
-from vcore.backend.core.db import get_db
-from vcore.backend.services.job_queue import get_consumer_status_map
-from vcore.backend.services.job_queue_ws_manager import job_queue_ws_manager
 
-from app import logger, paths, settings
+from backend import crud, logger, paths, settings
+from backend.core.db import get_db
+from backend.services.job_queue import get_consumer_status_map
+from backend.services.job_queue_ws_manager import job_queue_ws_manager
 
 
 router = APIRouter()
@@ -62,7 +61,7 @@ async def websocket_job_queue(websocket: WebSocket, db: Session = Depends(get_db
 async def stream_job_log(websocket: WebSocket, topic: str) -> None:
     """Stream the job log file to the websocket client in real-time."""
     log_file_name = f"job_{topic}_retry_0.txt"
-    from app import paths
+    from backend import paths
 
     log_path = paths.JOB_LOGS_PATH / log_file_name
     logger.debug(f"log_path: {log_path}")

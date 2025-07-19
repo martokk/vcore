@@ -14,13 +14,8 @@ from typing import Any
 from pydantic import BaseModel
 from sqlmodel import Session
 
-from app import logger
-from vcore.backend import crud, models, paths
-from vcore.backend.services.job_queue_ws_manager import job_queue_ws_manager
-
-from app import logger
-from vcore.backend import crud, models, paths
-from vcore.backend.services.job_queue_ws_manager import job_queue_ws_manager
+from backend import crud, logger, models, paths
+from backend.services.job_queue_ws_manager import job_queue_ws_manager
 
 
 class HueyConsumerWorker(BaseModel):
@@ -37,14 +32,14 @@ CONSUMERS: list[HueyConsumerWorker] = [
         db_path=paths.HUEY_DEFAULT_DB_PATH,
         log_path=paths.HUEY_DEFAULT_LOG_PATH,
         pid_file=paths.HUEY_DEFAULT_PID_FILE,
-        huey_module="vcore.backend.jobs.huey_default",
+        huey_module="backend.jobs.huey_default",
     ),
     HueyConsumerWorker(
         name="reserved",
         db_path=paths.HUEY_RESERVED_DB_PATH,
         log_path=paths.HUEY_RESERVED_LOG_PATH,
         pid_file=paths.HUEY_RESERVED_PID_FILE,
-        huey_module="vcore.backend.jobs.huey_reserved",
+        huey_module="backend.jobs.huey_reserved",
     ),
 ]
 

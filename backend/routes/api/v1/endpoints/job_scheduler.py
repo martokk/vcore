@@ -3,9 +3,9 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 
-from vcore.backend import crud, models
-from vcore.backend.core.db import get_db
-from vcore.backend.routes.api import deps
+from backend import crud, models
+from backend.core.db import get_db
+from backend.routes.api import deps
 
 
 router = APIRouter(prefix="/job-schedulers", tags=["Job Schedulers"])

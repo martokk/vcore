@@ -3,9 +3,9 @@ from typing import Any
 from fastapi import Depends, Request
 from sqlmodel import Session
 
-from vcore.backend import models
-from vcore.backend.core.db import get_db
-from vcore.backend.templating.deps import get_current_active_user, get_tokens_from_cookie
+from backend import models
+from backend.core.db import get_db
+from backend.templating.deps import get_current_active_user, get_tokens_from_cookie
 
 
 async def get_template_context(

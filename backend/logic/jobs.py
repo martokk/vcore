@@ -1,6 +1,6 @@
 import httpx
 
-from app import logger, settings
+from backend import logger, settings
 
 
 def push_jobs_to_websocket() -> None:
