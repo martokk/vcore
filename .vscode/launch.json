@@ -9,7 +9,7 @@
       "type": "python",
       "request": "launch",
       "module": "app",
-      "justMyCode": true,
+      "justMyCode": false,
       "cwd": "${workspaceFolder}",
       "python": "${workspaceFolder}/.venv/bin/python", // Specify the Python interpreter from the virtual environment
       "env": {
