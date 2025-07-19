@@ -5,8 +5,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "vcore"
-version = "1.0.0-alpha.1"
+version = "1.0.0-alpha.2"
 description = "vcore"
+packages = [
+    { include = "app" },
+    { include = "backend" }
+]
 readme = "README.md"
 authors = ["martokk <25113632+martokk@users.noreply.github.com>"]
 license = "MIT"
@@ -21,7 +25,7 @@ classifiers = []
 
 [tool.poetry.scripts]
 # Entry points for the package https://python-poetry.org/docs/pyproject/#scripts
-"app" = "app.__main__:app"
+"vcore" = "app.app:app"
 
 [tool.poetry.dependencies]
 python = "^3.10.12"
@@ -131,7 +135,7 @@ select = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["app"]
+known-first-party = ["app", "backend"]
 known-third-party = []
 extra-standard-library = ["typing", "typings", "types", "typing_extensions", "mypy", "mypy_extensions"]
 section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]

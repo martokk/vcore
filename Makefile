@@ -4,8 +4,8 @@ PYTHON := python
 PWD := `pwd`
 
 #* Docker variables
-PROJECT := vcore-app
-PROJECT_TITLE := vcore-app
+PROJECT := vcore
+PROJECT_TITLE := vcore
 VERSION := latest
 PYINSTALLER_ENTRY := $(PROJECT)/__main__.py
 

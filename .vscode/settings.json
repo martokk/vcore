@@ -208,4 +208,15 @@
 	"workbench.editorAssociations": {
 		"*.mdc": "default"
 	},
+	"python.defaultInterpreterPath": "./.venv/bin/python",
+	"python.analysis.extraPaths": [
+		"${workspaceFolder}",
+		"${workspaceFolder}/app",
+		"${workspaceFolder}/backend"
+	],
+	"python.analysis.autoImportCompletions": true,
+	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.autoSearchPaths": true,
+	"python.analysis.diagnosticMode": "workspace",
+	"python.analysis.stubPath": "./typings",
 }
