@@ -8,8 +8,9 @@ from sqlmodel import Session
 
 from backend import crud, models, settings
 from backend.core import security
-from backend.routes.api import deps
+from backend.core.db import get_db
 from backend.services import notify
+from backend.templating.deps import get_current_user
 
 
 router = APIRouter()
@@ -17,7 +18,7 @@ router = APIRouter()
 
 @router.post("/login/access-token", response_model=models.Tokens)
 async def login_access_token(
-    db: Session = Depends(deps.get_db), form_data: OAuth2PasswordRequestForm = Depends()
+    db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ) -> models.Tokens:
     """
     Get new access and refresh tokens from a username and password.
@@ -35,7 +36,7 @@ async def login_access_token(
 @router.post("/login/refresh-token", response_model=models.Tokens)
 async def login_refresh_token(
     refresh_token: str = Body(...),
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
 ) -> models.Tokens:
     """
     Get new access and refresh tokens from a refresh token.
@@ -51,7 +52,7 @@ async def login_refresh_token(
 
 
 @router.post("/login/test-token", response_model=models.UserRead)
-async def test_token(current_user: models.User = Depends(deps.get_current_user)) -> models.User:
+async def test_token(current_user: models.User = Depends(get_current_user)) -> models.User:
     """
     Test access token
 
@@ -66,7 +67,7 @@ async def test_token(current_user: models.User = Depends(deps.get_current_user))
 
 @router.post("/password-recovery/{username}", response_model=models.Msg)
 async def recover_password(
-    username: str, background_tasks: BackgroundTasks, db: Session = Depends(deps.get_db)
+    username: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)
 ) -> Any:
     """
     Password recovery endpoint.
@@ -115,7 +116,7 @@ async def recover_password(
 async def reset_password(
     token: str = Body(...),
     new_password: str = Body(...),
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
 ) -> Any:
     """
     Reset password endpoint.
@@ -161,7 +162,7 @@ async def reset_password(
 @router.post("/register", response_model=models.UserRead, status_code=status.HTTP_201_CREATED)
 async def create_user_open(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     username: str = Body(...),
     password: str = Body(...),
     email: EmailStr = Body(...),
