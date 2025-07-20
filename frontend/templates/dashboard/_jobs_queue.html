@@ -50,8 +50,8 @@
 </div>
 
 <script type="module">
-    import { apiCrud, uiHelpers } from '/static/js/api_utils.js';
-    import { toast } from '/static/js/toast.js';
+    import { apiCrud, uiHelpers } from 'vcore/static/js/api_utils.js';
+    import { toast } from 'vcore/static/js/toast.js';
 
     function connectJobQueueWebSocket() {
         let protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';

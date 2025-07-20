@@ -1,5 +1,5 @@
-import { apiCrud } from '/static/js/api_utils.js';
-import { uiHelpers } from '/static/js/ui_helpers.js';
+import { apiCrud } from 'vcore/static/js/api_utils.js';
+import { uiHelpers } from 'vcore/static/js/ui_helpers.js';
 
 class InlineEditor {
     constructor({ containerSelector, entityType, entityId }) {

@@ -10,7 +10,7 @@ from backend import logger, settings
 from backend.core.db import get_db_context, initialize_tables_and_initial_data
 from backend.core.hooks import register_hook
 from backend.jobs.execute_scheduler import run_on_start_schedulers
-from backend.paths import STATIC_PATH, VCORE_STATIC_PATH
+from backend.paths import STATIC_PATH
 from backend.routes.api import vcore_api_router
 from backend.routes.views import vcore_views_router
 from backend.scripts.example import ScriptExample
@@ -99,8 +99,8 @@ app.include_router(vcore_api_router, prefix="/api/v1")
 app.include_router(vcore_views_router)
 
 # Mount static files
-STATIC_PATH.mkdir(parents=True, exist_ok=True)
-app.mount("/static", StaticFiles(directory=STATIC_PATH))
+# STATIC_PATH.mkdir(parents=True, exist_ok=True)
+app.mount("/vcore/static", StaticFiles(directory=STATIC_PATH))
 
-VCORE_STATIC_PATH.mkdir(parents=True, exist_ok=True)
-app.mount("/vcore/static", StaticFiles(directory=VCORE_STATIC_PATH))
+# # VCORE_STATIC_PATH.mkdir(parents=True, exist_ok=True)
+# app.mount("/vcore/static", StaticFiles(directory=VCORE_STATIC_PATH))

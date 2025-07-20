@@ -4,13 +4,13 @@ from sqlmodel import Session
 
 from backend import crud, models, settings
 from backend.core import security
+from backend.core.db import get_db
 from backend.routes.api import deps
 from backend.services import notify
 
 
-router = APIRouter()
+router = APIRouter(prefix="/users", tags=["users"])
 
-router = APIRouter()
 ModelClass = models.User
 ModelReadClass = models.UserRead
 ModelCreateClass = models.UserCreate
@@ -20,7 +20,7 @@ model_crud = crud.user
 
 @router.get("/", response_model=list[models.UserRead])
 async def get_users(
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     skip: int = 0,
     limit: int = 100,
     _: models.User = Depends(deps.get_current_active_superuser),
@@ -37,7 +37,7 @@ async def get_users(
     Returns:
         list[ModelClass]: List of objects.
     """
-    return await crud.user.get_all(db=db, skip=skip, limit=limit)
+    return await crud.user.get_multi(db=db, skip=skip, limit=limit)
 
 
 @router.get("/me", response_model=models.UserRead)
@@ -60,7 +60,7 @@ async def get_me(
 async def get_by_id(
     id: str,
     current_user: models.User = Depends(deps.get_current_active_user),
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
 ) -> models.User:
     """
     Get user by id.
@@ -96,7 +96,7 @@ async def get_by_id(
 @router.post("/", response_model=models.UserRead)
 async def create_user(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     user_in: models.UserCreateWithPassword,
     _: models.User = Depends(deps.get_current_active_superuser),
     background_tasks: BackgroundTasks,
@@ -118,7 +118,7 @@ async def create_user(
     """
     # Creates user
     try:
-        user = await crud.user.create_with_permissions(db, obj_in=user_in)
+        user = await crud.user._create_with_password(db, obj_in=user_in)
     except crud.RecordAlreadyExistsError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -139,7 +139,7 @@ async def create_user(
 @router.patch("/{user_id}", response_model=models.UserRead)
 async def update_user(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     user_id: str,
     user_in: models.UserUpdate,
     _: models.User = Depends(deps.get_current_active_superuser),
@@ -162,7 +162,7 @@ async def update_user(
 @router.put("/me", response_model=models.UserRead)
 async def update_user_me(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     password: str = Body(None),
     full_name: str = Body(None),
     email: EmailStr = Body(None),
@@ -195,7 +195,7 @@ async def update_user_me(
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     id: str,
     _: models.User = Depends(deps.get_current_active_superuser),
 ) -> None:

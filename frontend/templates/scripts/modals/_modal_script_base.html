@@ -85,7 +85,7 @@
 
 {% block modal_scripts %}
 <script type="module">
-    import { apiCrud } from '/static/js/api_utils.js';
+    import { apiCrud } from 'vcore/static/js/api_utils.js';
     // This script can be overridden or extended in child templates
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('{{ script_input_form_id }}');

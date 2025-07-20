@@ -280,9 +280,9 @@
 
 {% block js_scripts %}
 <script type="module">
-    import { apiCrud, uiHelpers } from '/static/js/api_utils.js';
-    import { toast } from '/static/js/toast.js';
-    import { LogStreamer } from '/static/js/tools/log_streamer.js';
+    import { apiCrud, uiHelpers } from 'vcore/static/js/api_utils.js';
+    import { toast } from 'vcore/static/js/toast.js';
+    import { LogStreamer } from 'vcore/static/js/tools/log_streamer.js';
 
     const jobModalEl = document.getElementById('jobModal');
     const jobModal = new bootstrap.Modal(jobModalEl);

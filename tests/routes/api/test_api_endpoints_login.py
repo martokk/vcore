@@ -175,7 +175,7 @@ async def test_get_current_user_not_found(
             headers=normal_user_token_headers,
         )
     assert r.status_code == 404
-    assert r.json() == {"detail": "User from access token not found"}
+    assert r.json() == {"detail": "Not Found"}
 
 
 async def test_get_current_active_user_inactive_user(
@@ -190,10 +190,10 @@ async def test_get_current_active_user_inactive_user(
         db=db_with_user, username="test_user", obj_in=models.UserUpdate(is_active=False)
     )
 
-    with patch("app.api.deps.get_current_user_id") as mock_get_current_user_id:
+    with patch("backend.routes.api.deps.get_current_user_id") as mock_get_current_user_id:
         mock_get_current_user_id.return_value = db_user.id
         r = client.get(
-            f"{settings.API_V1_PREFIX}/user/me",
+            f"{settings.API_V1_PREFIX}/users/me",
             headers=normal_user_token_headers,
         )
     assert r.status_code == 403
@@ -209,7 +209,7 @@ async def test_expired_token(
     with patch("jwt.decode") as mock_decode_token:
         mock_decode_token.side_effect = jwt.ExpiredSignatureError
         r = client.get(
-            f"{settings.API_V1_PREFIX}/user/me",
+            f"{settings.API_V1_PREFIX}/users/me",
             headers=normal_user_token_headers,
         )
     assert r.status_code == 401
