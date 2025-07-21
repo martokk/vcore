@@ -1,9 +1,10 @@
 import uvicorn
 
-from backend import logger, settings
+from backend import logger
+from backend.core.settings import VCoreBaseSettings
 
 
-def start_server() -> None:
+def start_server(settings: VCoreBaseSettings) -> None:
     """
     Start Uvicorn server using the configuration from settings.
     """
@@ -13,7 +14,7 @@ def start_server() -> None:
         host=settings.SERVER_HOST,
         port=settings.SERVER_PORT,
         log_level=settings.LOG_LEVEL.lower(),
-        reload=settings.UVICORN_RELOAD,
-        workers=settings.UVICORN_WORKERS,
+        reload=False,
+        workers=1,
         app_dir="",
     )

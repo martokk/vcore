@@ -8,7 +8,7 @@ import os
 # Load environment variables
 load_dotenv()
 
-from app.models import *
+from _app.models import *
 from backend.models import *
 
 # this is the Alembic Config object, which provides

@@ -8,7 +8,7 @@ name = "vcore"
 version = "1.0.0-alpha.2"
 description = "vcore"
 packages = [
-    { include = "app" },
+    { include = "_app" },
     { include = "backend" }
 ]
 readme = "README.md"
@@ -25,7 +25,7 @@ classifiers = []
 
 [tool.poetry.scripts]
 # Entry points for the package https://python-poetry.org/docs/pyproject/#scripts
-"vcore" = "app.app:app"
+"vcore" = "_app.app:app"
 
 [tool.poetry.dependencies]
 python = "^3.10.12"

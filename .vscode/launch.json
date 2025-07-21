@@ -8,7 +8,7 @@
       "name": "Python: Module (venv)",
       "type": "python",
       "request": "launch",
-      "module": "app",
+      "module": "_app",
       "justMyCode": false,
       "cwd": "${workspaceFolder}",
       "python": "${workspaceFolder}/.venv/bin/python", // Specify the Python interpreter from the virtual environment

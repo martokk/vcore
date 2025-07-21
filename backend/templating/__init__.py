@@ -15,12 +15,10 @@ def get_templates() -> Jinja2Templates:
         Jinja2Templates: Jinja2Templates object with multiple directories.
     """
 
-    # Templates will be searched in order: app templates first, then vcore templates.
-    # This allows for app-specific templates to override vcore templates.
+    # Templates will be searched in order: app first, then vcore.
+    # app-specific templates to override vcore templates.
     templates = Jinja2Templates(directory=str(paths.TEMPLATES_PATH))
 
-    # Add additional template directories to the loader
-    # Ensure we have a FileSystemLoader with searchpath attribute
     if templates.env.loader is not None and hasattr(templates.env.loader, "searchpath"):
         loader = cast("FileSystemLoader", templates.env.loader)
         loader.searchpath.append(str(paths.VCORE_TEMPLATES_PATH))

@@ -2,7 +2,7 @@
 
 ### Hooks
 
-- Hooks allow for the vcore-app to inject its own functionality into the vcore-framework. They effectively allow the vCore Framework to attempt to call functions from the vcore-app.
+- Hooks allow for the vcore_app to inject its own functionality into the vcore-framework. They effectively allow the vCore Framework to attempt to call functions from the vcore_app.
 - Hooks are registered in the `app.app.py` file.
 
 #### vCore Framework Hooks

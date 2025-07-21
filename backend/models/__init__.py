@@ -4,6 +4,5 @@ from .common import *
 from .job import *
 from .job_scheduler import *
 from .msg import *
-from .settings import *
 from .tokens import *
 from .user import *

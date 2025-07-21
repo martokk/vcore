@@ -1,14 +1,12 @@
 from fastapi.templating import Jinja2Templates
 
-from backend.core.hooks import register_hook
-
 
 # from app.templating.filters import filter_app_specific_filter
 
 
 def inject_app_templating_env(templates: Jinja2Templates) -> Jinja2Templates:
     """
-    This vcore-app hook is called by the vCore Framework to inject the app-specific templating environment into the templates.
+    This vcore_app hook is called by the vCore Framework to inject the app-specific templating environment into the templates.
     """
 
     # Add custom filters to templates
@@ -18,7 +16,3 @@ def inject_app_templating_env(templates: Jinja2Templates) -> Jinja2Templates:
     # templates.env.globals["APP_SPECIFIC_GLOBAL_VARIABLE"] = "app_specific_global_variable"
 
     return templates
-
-
-# Register Hooks
-register_hook("inject_app_templating_env", inject_app_templating_env)

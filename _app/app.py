@@ -5,12 +5,15 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session
 
-from app.templating.env import inject_app_templating_env
-from backend import logger, settings
+from _app import settings
+from _app.paths import STATIC_PATH
+from _app.templating.env import inject_app_templating_env
+from backend import logger
 from backend.core.db import get_db_context, initialize_tables_and_initial_data
 from backend.core.hooks import register_hook
 from backend.jobs.execute_scheduler import run_on_start_schedulers
-from backend.paths import STATIC_PATH
+
+# from backend.paths import VCORE_STATIC_PATH
 from backend.routes.api import vcore_api_router
 from backend.routes.views import vcore_views_router
 from backend.scripts.example import ScriptExample
@@ -102,5 +105,5 @@ app.include_router(vcore_views_router)
 # STATIC_PATH.mkdir(parents=True, exist_ok=True)
 app.mount("/vcore/static", StaticFiles(directory=STATIC_PATH))
 
-# # VCORE_STATIC_PATH.mkdir(parents=True, exist_ok=True)
+# VCORE_STATIC_PATH.mkdir(parents=True, exist_ok=True)
 # app.mount("/vcore/static", StaticFiles(directory=VCORE_STATIC_PATH))

@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlmodel import Session, SQLModel, create_engine
 from starlette.datastructures import URL
 
-from app.app import app
+from _app.app import app
 from backend import crud, models, settings
 from backend.core import security
 from backend.core.db import get_db, initialize_tables_and_initial_data

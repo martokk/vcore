@@ -16,9 +16,8 @@ def register_hook(hook_name: str, hook_func: Callable[..., Any]) -> None:
 def call_hook(hook_name: str, *args: Any, **kwargs: Any) -> Any:
     """Call a hook function."""
     if hook_name not in HOOKS:
-        raise ValueError(
-            f"Hook `{hook_name}` not found in HOOKS. Available hooks: {list(HOOKS.keys())}."
-        )
+        print(f"Hook `{hook_name}` not found in HOOKS. Available hooks: {list(HOOKS.keys())}.")
+        return None
 
     hook_func = HOOKS[hook_name]
     if hook_func is None or not callable(hook_func):

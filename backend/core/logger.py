@@ -1,15 +1,25 @@
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING
 
 from loguru import logger as _logger
+
+
+if TYPE_CHECKING:
+    from loguru import Logger
+
+LOGGER: "Logger"
 
 
 def setup_logger(
     error_log_file_path: Path,
     log_file_path: Path,
     log_level: str,
-) -> Any:
+) -> "Logger":
     """Configure and return the application logger."""
+    global LOGGER
+
+    # Remove existing default logger to avoid duplicate logs
+    _logger.remove()
 
     # Configure loggers for file output
     _logger.add(
@@ -28,4 +38,14 @@ def setup_logger(
     logger = _logger.bind(name="logger")
     logger.info(f"Log level set by .env to '{log_level}'")
 
+    LOGGER = logger
+
     return logger
+
+
+def get_logger() -> "Logger":
+    """Get the logger."""
+    global LOGGER
+    if not LOGGER:
+        raise ValueError("Logger not set")
+    return LOGGER

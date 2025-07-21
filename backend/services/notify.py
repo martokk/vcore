@@ -3,14 +3,8 @@ from typing import Any
 
 import emails
 from emails.template import JinjaTemplate
-from loguru import logger as _logger
 
-from backend import paths, settings
-
-
-# Main Logger
-logger = _logger.bind(name="logger")
-logger.add(paths.LOG_FILE, level=settings.LOG_LEVEL, rotation="10 MB")
+from backend import logger, paths, settings
 
 
 async def notify(

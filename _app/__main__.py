@@ -1,4 +1,4 @@
-from app import logger
+from backend import logger
 from backend.core.server import start_server
 
 
