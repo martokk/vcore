@@ -1,3 +1,9 @@
+---
+description: Organize frontend assets following vCore patterns with proper CSS/JS structure and Bootstrap integration
+globs: frontend/static/**/*.css,frontend/static/**/*.js
+alwaysApply: false
+---
+
 # vCore Frontend Assets
 
 ## Context

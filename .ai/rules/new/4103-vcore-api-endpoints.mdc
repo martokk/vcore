@@ -1,3 +1,9 @@
+---
+description: Structure FastAPI endpoints following vCore patterns with proper authentication and error handling
+globs: backend/routes/api/**/*.py
+alwaysApply: false
+---
+
 # vCore API Endpoints
 
 ## Context

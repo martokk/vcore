@@ -1,3 +1,9 @@
+---
+description: Structure SQLModel database models following vCore patterns with proper validation and inheritance
+globs: backend/models/**/*.py
+alwaysApply: false
+---
+
 # vCore Database Models
 
 ## Context

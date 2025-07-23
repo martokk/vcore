@@ -1,3 +1,9 @@
+---
+description: Follow vCore Framework directory structure when creating or modifying files to ensure proper organization
+globs: **/*.py,**/*.html,**/*.js,**/*.css
+alwaysApply: false
+---
+
 # vCore Framework Project Structure
 
 ## Context

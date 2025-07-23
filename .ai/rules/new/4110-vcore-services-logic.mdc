@@ -1,3 +1,9 @@
+---
+description: Organize business logic using vCore service patterns with proper separation of concerns and error handling
+globs: backend/services/**/*.py,backend/logic/**/*.py
+alwaysApply: false
+---
+
 # vCore Services & Business Logic
 
 ## Context

@@ -1,3 +1,9 @@
+---
+description: Structure Jinja2 templates following vCore patterns with proper inheritance and context management
+globs: frontend/templates/**/*.html,backend/templating/**/*.py
+alwaysApply: false
+---
+
 # vCore Template System
 
 ## Context

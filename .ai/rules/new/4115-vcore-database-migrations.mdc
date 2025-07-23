@@ -1,3 +1,9 @@
+---
+description: Manage database schema changes using vCore Alembic patterns with proper migration practices
+globs: migrations/**/*.py,alembic.ini
+alwaysApply: false
+---
+
 # vCore Database Migrations
 
 ## Context

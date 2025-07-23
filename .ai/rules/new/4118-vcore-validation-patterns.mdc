@@ -1,3 +1,9 @@
+---
+description: Implement data validation using vCore Pydantic patterns with proper error handling and type safety
+globs: backend/models/**/*.py,backend/routes/**/*.py
+alwaysApply: false
+---
+
 # vCore Validation Patterns
 
 ## Context

@@ -1,3 +1,9 @@
+---
+description: Structure utility functions following vCore patterns with proper organization and reusability
+globs: backend/utils/**/*.py
+alwaysApply: false
+---
+
 # vCore Utilities
 
 ## Context

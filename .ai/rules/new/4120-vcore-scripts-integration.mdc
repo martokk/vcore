@@ -1,3 +1,9 @@
+---
+description: Integrate vCore Scripts following framework patterns with proper execution and service integration
+globs: backend/scripts/**/*.py,backend/services/scripts.py
+alwaysApply: false
+---
+
 # vCore Scripts Integration
 
 ## Context

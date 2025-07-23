@@ -1,3 +1,9 @@
+---
+description: Implement WebSocket connections using vCore patterns for real-time communication and broadcasting
+globs: backend/core/websocket.py,backend/services/**/*ws*.py,backend/routes/**/*ws*.py
+alwaysApply: false
+---
+
 # vCore WebSocket Implementation
 
 ## Context

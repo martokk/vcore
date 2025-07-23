@@ -1,3 +1,9 @@
+---
+description: Manage configuration using vCore settings patterns with proper validation and environment handling
+globs: backend/models/settings.py,backend/core/settings.py,**/.env
+alwaysApply: false
+---
+
 # vCore Configuration & Settings
 
 ## Context

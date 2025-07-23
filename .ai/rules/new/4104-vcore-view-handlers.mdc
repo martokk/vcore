@@ -1,3 +1,9 @@
+---
+description: Structure web view handlers following vCore patterns with proper templating and context management
+globs: backend/routes/views/**/*.py
+alwaysApply: false
+---
+
 # vCore View Handlers
 
 ## Context

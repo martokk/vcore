@@ -1,3 +1,9 @@
+---
+description: Use FastAPI dependency injection following vCore patterns for database sessions, authentication, and context
+globs: backend/routes/**/*.py,backend/core/deps.py
+alwaysApply: false
+---
+
 # vCore Dependency Injection
 
 ## Context

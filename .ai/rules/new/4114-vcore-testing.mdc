@@ -1,3 +1,9 @@
+---
+description: Structure tests following vCore patterns with proper fixtures, authentication, and database handling
+globs: tests/**/*.py
+alwaysApply: false
+---
+
 # vCore Testing
 
 ## Context

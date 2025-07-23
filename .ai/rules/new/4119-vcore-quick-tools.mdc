@@ -1,3 +1,9 @@
+---
+description: Create Quick Tools following vCore patterns with proper template structure and API integration
+globs: frontend/templates/quick_tools/**/*.html,backend/routes/views/quick_tools/**/*.py,backend/routes/api/v1/endpoints/quick_tools/**/*.py
+alwaysApply: false
+---
+
 # vCore Quick Tools
 
 ## Context

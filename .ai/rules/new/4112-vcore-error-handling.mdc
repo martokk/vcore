@@ -1,3 +1,9 @@
+---
+description: Handle errors using vCore exception patterns with proper HTTP status codes and user-friendly messages
+globs: backend/**/*.py
+alwaysApply: false
+---
+
 # vCore Error Handling
 
 ## Context

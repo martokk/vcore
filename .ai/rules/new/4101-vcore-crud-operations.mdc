@@ -1,3 +1,9 @@
+---
+description: Use vCore BaseCRUD patterns when implementing database operations for consistent data access
+globs: backend/crud/**/*.py,backend/models/**/*.py
+alwaysApply: false
+---
+
 # vCore CRUD Operations
 
 ## Context

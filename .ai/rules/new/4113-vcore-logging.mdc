@@ -1,3 +1,9 @@
+---
+description: Implement logging using vCore patterns with proper levels and structured information
+globs: backend/**/*.py
+alwaysApply: false
+---
+
 # vCore Logging
 
 ## Context

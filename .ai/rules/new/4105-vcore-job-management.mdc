@@ -1,3 +1,9 @@
+---
+description: Implement background job processing using vCore job queue patterns with proper priority management
+globs: backend/jobs/**/*.py,backend/services/**/*.py,backend/models/job.py
+alwaysApply: false
+---
+
 # vCore Job Management
 
 ## Context
