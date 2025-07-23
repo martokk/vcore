@@ -217,4 +217,8 @@
 	"python.analysis.autoSearchPaths": true,
 	"python.analysis.diagnosticMode": "workspace",
 	"python.analysis.stubPath": "./typings",
+	"editor.someSetting": true,
+	"markdownlint.config": {
+		"MD024": false,
+	}
 }

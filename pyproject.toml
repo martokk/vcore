@@ -242,8 +242,6 @@ addopts = "-v --cov=app --color=yes --tb=short"
 source = ["app"]
 branch = true
 omit = [
-    "app/api/**/*",
-    "app/api/*",
 ]
 
 [tool.coverage.report]
