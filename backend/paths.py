@@ -3,7 +3,6 @@ from pathlib import Path
 
 from backend import PROJECT_PATH, settings
 
-
 if not PROJECT_PATH:
     raise RuntimeError(
         "VCore is not setup. Call vcore_setup() before importing other backend modules."
@@ -58,9 +57,17 @@ TEMPLATES_PATH = FRONTEND_PATH / "templates"
 
 # Job Queue Paths
 JOB_LOGS_PATH = LOGS_PATH / "jobs"
-HUEY_DEFAULT_DB_PATH = convert_relative_path_to_absolute(settings.HUEY_DEFAULT_SQLITE_PATH)
-HUEY_RESERVED_DB_PATH = convert_relative_path_to_absolute(settings.HUEY_RESERVED_SQLITE_PATH)
-HUEY_DEFAULT_LOG_PATH = convert_relative_path_to_absolute(settings.HUEY_DEFAULT_LOG_PATH)
-HUEY_RESERVED_LOG_PATH = convert_relative_path_to_absolute(settings.HUEY_RESERVED_LOG_PATH)
+HUEY_DEFAULT_DB_PATH = convert_relative_path_to_absolute(
+    settings.HUEY_DEFAULT_SQLITE_PATH
+)
+HUEY_RESERVED_DB_PATH = convert_relative_path_to_absolute(
+    settings.HUEY_RESERVED_SQLITE_PATH
+)
+HUEY_DEFAULT_LOG_PATH = convert_relative_path_to_absolute(
+    settings.HUEY_DEFAULT_LOG_PATH
+)
+HUEY_RESERVED_LOG_PATH = convert_relative_path_to_absolute(
+    settings.HUEY_RESERVED_LOG_PATH
+)
 HUEY_DEFAULT_PID_FILE = HUEY_DEFAULT_LOG_PATH.with_suffix(".pid")
 HUEY_RESERVED_PID_FILE = HUEY_RESERVED_LOG_PATH.with_suffix(".pid")

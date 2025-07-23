@@ -8,7 +8,6 @@ name = "vcore"
 version = "1.0.0-alpha.2"
 description = "vcore"
 packages = [
-    { include = "_app" },
     { include = "backend" }
 ]
 readme = "README.md"
