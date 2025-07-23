@@ -1,0 +1,43 @@
+# vCore Database Migrations
+
+## Context
+- When making database schema changes
+- When creating or modifying database models
+- When managing database versioning and deployment
+
+## Requirements
+- Use Alembic for all schema changes
+- Generate migrations with descriptive messages
+- Review auto-generated migrations before applying
+- Test migrations in development before production
+- Use proper migration naming conventions
+- Handle data migrations carefully
+
+## Examples
+
+<example>
+# Good: Proper migration workflow
+# 1. Make model changes
+# 2. Generate migration
+alembic revision --autogenerate -m "Add user profile table"
+
+# 3. Review generated migration file
+# 4. Apply migration
+alembic upgrade head
+
+# 5. Test rollback capability
+alembic downgrade -1
+</example>
+
+<example type="invalid">
+# Bad: Manual schema changes
+# Direct SQL execution bypassing Alembic
+db.execute("ALTER TABLE users ADD COLUMN new_field VARCHAR(255)")
+</example>
+
+## Critical Rules
+- ALWAYS use Alembic for schema changes
+- ALWAYS review auto-generated migrations before applying
+- ALWAYS use descriptive migration messages
+- ALWAYS test migrations and rollbacks in development
+- NEVER make direct database schema changes outside of migrations

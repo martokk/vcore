@@ -1,0 +1,44 @@
+# vCore Logging
+
+## Context
+- When adding logging to application functionality
+- When debugging and monitoring application behavior
+- When tracking important events and errors
+
+## Requirements
+- Use the app logger instance for consistency  
+- Use appropriate log levels (DEBUG, INFO, WARNING, ERROR)
+- Include contextual information in log messages
+- Log important business events and errors
+- Use structured logging with relevant data
+- Avoid logging sensitive information
+
+## Examples
+
+<example>
+# Good: Proper logging usage
+from app import logger
+
+async def process_job(job_id: str) -> None:
+    logger.info(f"Starting job processing for job {job_id}")
+    try:
+        # Processing logic
+        logger.info(f"Job {job_id} completed successfully")
+    except Exception as e:
+        logger.error(f"Job {job_id} failed: {e}")
+        raise
+</example>
+
+<example type="invalid">
+# Bad: Poor logging practices
+import logging
+print(f"Debug info: {sensitive_data}")  # Wrong method
+logging.info("Something happened")  # No context
+</example>
+
+## Critical Rules
+- ALWAYS use the app logger instance (from app import logger)
+- ALWAYS include relevant context in log messages (IDs, operations)
+- ALWAYS use appropriate log levels for message severity
+- NEVER log sensitive information (passwords, tokens)
+- ALWAYS log exceptions with proper error context

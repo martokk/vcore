@@ -1,0 +1,49 @@
+# vCore Dependency Injection
+
+## Context
+- When creating API endpoints or view handlers
+- When working with database sessions and authentication
+- When implementing reusable dependencies
+
+## Requirements
+- Use Depends() for all injectable dependencies
+- Create reusable dependency functions in deps modules
+- Use proper type hints for dependency return types
+- Implement proper dependency scoping (request, session)
+- Use dependency override for testing
+- Handle dependency errors gracefully
+
+## Examples
+
+<example>
+# Good: Proper dependency usage
+from fastapi import Depends
+from sqlmodel import Session
+from vcore.backend.core.db import get_db
+from vcore.backend.routes.api import deps
+
+@router.get("/protected")
+async def protected_endpoint(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(deps.get_current_active_user),
+    context: dict = Depends(get_template_context),
+) -> dict:
+    """Endpoint with proper dependency injection."""
+    # Use dependencies here
+    return {"user": current_user.username}
+</example>
+
+<example type="invalid">
+# Bad: Manual dependency management
+@router.get("/endpoint")
+async def endpoint():
+    db = SessionLocal()  # Manual session creation
+    # No authentication, no proper cleanup
+</example>
+
+## Critical Rules
+- ALWAYS use Depends() for injectable dependencies
+- ALWAYS use get_db for database session dependencies
+- ALWAYS use authentication dependencies for protected endpoints
+- ALWAYS use proper type hints for dependencies
+- NEVER manually create database sessions in endpoints

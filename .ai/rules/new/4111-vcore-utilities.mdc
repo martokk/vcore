@@ -1,0 +1,46 @@
+# vCore Utilities
+
+## Context
+- When creating helper functions and utilities
+- When implementing reusable functionality
+- When working with data transformation and formatting
+
+## Requirements
+- Organize utilities by functional domain (datetime, uuid, etc.)
+- Create pure functions without side effects where possible
+- Use proper type hints and documentation
+- Handle edge cases and errors gracefully
+- Make utilities framework-agnostic when possible
+- Use consistent naming conventions
+
+## Examples
+
+<example>
+# Good: Proper utility function
+from datetime import datetime, timezone
+from app import settings
+
+def utc_to_local(dt: str | datetime) -> datetime:
+    """Convert UTC datetime to local timezone."""
+    if isinstance(dt, str):
+        dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(settings.TIMEZONE_INFO)
+</example>
+
+<example type="invalid">
+# Bad: Utility with side effects and poor structure
+def process_thing(data):
+    # No type hints, unclear purpose
+    global some_state  # Side effects
+    print("Processing...")  # Side effects
+    return data.upper()
+</example>
+
+## Critical Rules
+- ALWAYS use proper type hints for parameters and returns
+- ALWAYS include docstrings explaining purpose and usage
+- ALWAYS handle edge cases and invalid inputs
+- NEVER create utilities with unnecessary side effects
+- ALWAYS organize by functional domain (datetime, string, etc.)

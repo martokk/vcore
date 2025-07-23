@@ -1,0 +1,49 @@
+# vCore WebSocket Implementation
+
+## Context
+- When implementing real-time communication features
+- When creating WebSocket endpoints for live updates
+- When managing WebSocket connections and broadcasting
+
+## Requirements
+- Use WebSocketManager base class for connection management
+- Implement proper connect/disconnect handling
+- Use JSON message format for communication
+- Handle WebSocket exceptions gracefully
+- Implement broadcasting to multiple clients
+- Use dependency injection for WebSocket endpoints
+
+## Examples
+
+<example>
+# Good: Proper WebSocket implementation
+from fastapi import WebSocket, WebSocketDisconnect
+from vcore.backend.core.websocket import WebSocketManager
+
+manager = WebSocketManager()
+
+@router.websocket("/ws/updates")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+            await manager.broadcast({"status": "updated"})
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+</example>
+
+<example type="invalid">
+# Bad: Direct WebSocket handling without manager
+@app.websocket("/ws")
+async def websocket(websocket):
+    await websocket.accept()
+    # No connection management or error handling
+</example>
+
+## Critical Rules
+- ALWAYS use WebSocketManager for connection management
+- ALWAYS handle WebSocketDisconnect exceptions
+- ALWAYS use JSON format for WebSocket messages
+- ALWAYS implement proper connect/disconnect lifecycle
+- NEVER handle WebSocket connections without proper error handling

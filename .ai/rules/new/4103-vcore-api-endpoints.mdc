@@ -1,0 +1,51 @@
+# vCore API Endpoints
+
+## Context
+- When creating REST API endpoints
+- When implementing CRUD operations via HTTP
+- When working with FastAPI routers and dependencies
+
+## Requirements
+- Use APIRouter with proper prefix and tags
+- Implement proper dependency injection for database and auth
+- Use response models and proper status codes
+- Handle exceptions with appropriate HTTP responses
+- Include comprehensive docstrings
+- Follow RESTful conventions for HTTP methods
+
+## Examples
+
+<example>
+# Good: Proper vCore API endpoint
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlmodel import Session
+from vcore.backend import crud, models
+from vcore.backend.core.db import get_db
+from vcore.backend.routes.api import deps
+
+router = APIRouter(prefix="/items", tags=["Items"])
+
+@router.post("/", response_model=models.ItemRead, status_code=status.HTTP_201_CREATED)
+async def create_item(
+    item_in: models.ItemCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(deps.get_current_active_user),
+) -> models.Item:
+    """Create a new item."""
+    return await crud.item.create(db, obj_in=item_in)
+</example>
+
+<example type="invalid">
+# Bad: Missing dependencies, validation, error handling
+@app.get("/items")
+def get_items():
+    # Direct database access, no auth, no validation
+    return db.query(Item).all()
+</example>
+
+## Critical Rules
+- ALWAYS use APIRouter with prefix and tags
+- ALWAYS use proper dependency injection for db and auth
+- ALWAYS include response_model and status codes
+- ALWAYS handle exceptions with HTTPException
+- NEVER access database directly without CRUD layer

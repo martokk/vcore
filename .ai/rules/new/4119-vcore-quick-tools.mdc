@@ -1,0 +1,62 @@
+# vCore Quick Tools
+
+## Context
+- When creating new Quick Tools for rapid utility development
+- When implementing single-purpose administrative tools
+- When building tools with simple form input and result display
+
+## Requirements
+- Extend from `quick_tools/quick_tool_base.html` template
+- Implement required template blocks consistently
+- Create corresponding API endpoint for form processing
+- Use FormProcessor.js for client-side form handling
+- Add navigation links in sidebar appropriately
+- Include proper error handling and result display
+
+## Examples
+
+<example>
+# Good: Proper Quick Tool template structure
+{% extends "quick_tools/quick_tool_base.html" %}
+
+{% block title %}Data Converter{% endblock %}
+{% block quick_tool_name %}Data Converter{% endblock %}
+{% block quick_tool_description %}Convert data between formats{% endblock %}
+
+{% block quick_tool_input_form %}
+<form id="converterForm">
+    <div class="mb-3">
+        <label for="inputData" class="form-label">Input Data</label>
+        <textarea class="form-control" id="inputData" name="input_data" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Convert</button>
+</form>
+{% endblock %}
+
+{% block js_scripts %}
+<script type="module">
+    import { FormProcessor } from '/static/js/form_processor.js';
+    FormProcessor.initializeForm({
+        formId: 'converterForm',
+        endpoint: '/api/v1/convert-data',
+        method: 'POST'
+    });
+</script>
+{% endblock %}
+</example>
+
+<example type="invalid">
+# Bad: Not extending base template
+<html>
+<body>
+    <form><!-- Custom form without base structure --></form>
+</body>
+</html>
+</example>
+
+## Critical Rules
+- ALWAYS extend from `quick_tools/quick_tool_base.html`
+- ALWAYS implement all required template blocks
+- ALWAYS use FormProcessor.js for form handling
+- ALWAYS add navigation link in sidebar
+- NEVER use 'bg-light' class in Quick Tool templates

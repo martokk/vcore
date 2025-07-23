@@ -1,0 +1,46 @@
+# vCore Frontend Assets
+
+## Context
+- When working with CSS stylesheets and JavaScript files
+- When implementing responsive design and UI components
+- When integrating with Bootstrap 5 and vCore theme system
+
+## Requirements
+- Organize CSS by component or feature area
+- Use CSS custom properties for theming
+- Implement responsive design with Bootstrap 5
+- Create modular JavaScript components
+- Use modern ES6+ JavaScript patterns
+- Avoid conflicting styles with vCore theme
+
+## Examples
+
+<example>
+# Good: Proper CSS organization
+/* frontend/static/css/components/cards.css */
+.custom-card {
+    --card-border-radius: var(--bs-border-radius);
+    border-radius: var(--card-border-radius);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .custom-card {
+        margin-bottom: 1rem;
+    }
+}
+</example>
+
+<example type="invalid">
+# Bad: Inline styles and poor organization
+<div style="background: white; padding: 20px;">
+    <!-- Inline styles instead of CSS classes -->
+</div>
+</example>
+
+## Critical Rules
+- ALWAYS use CSS classes instead of inline styles
+- ALWAYS use CSS custom properties for theme consistency
+- ALWAYS implement responsive design with Bootstrap breakpoints
+- ALWAYS organize CSS by component or feature
+- NEVER override vCore core theme variables without consideration
