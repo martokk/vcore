@@ -1,0 +1,53 @@
+---
+description: Manage configuration using vCore settings patterns with proper validation and environment handling
+globs: backend/models/settings.py,backend/core/settings.py,**/.env
+alwaysApply: false
+---
+
+# vCore Configuration & Settings
+
+## Context
+- When defining application settings
+- When working with environment variables
+- When implementing configuration validation
+
+## Requirements
+- Extend PythonFastAPIBaseSettings for settings classes
+- Use proper validators for required fields
+- Implement environment-based configuration loading
+- Use proper type hints and default values
+- Handle invalid default values with validation errors
+- Use pydantic validators for complex validation
+
+## Examples
+
+<example>
+# Good: Proper settings implementation
+from pydantic import validator
+from pydantic_settings import BaseSettings
+
+class AppSettings(PythonFastAPIBaseSettings):
+    API_KEY: str = "invalid_default_value"
+    MAX_CONNECTIONS: int = 100
+    
+    @validator("API_KEY")
+    def validate_api_key(cls, v: str) -> str:
+        if v == "invalid_default_value":
+            raise ValueError("API_KEY must be provided")
+        return v
+        
+settings = AppSettings()
+</example>
+
+<example type="invalid">
+# Bad: Direct environment variable access
+import os
+API_KEY = os.getenv("API_KEY", "default")  # No validation
+</example>
+
+## Critical Rules
+- ALWAYS extend PythonFastAPIBaseSettings for settings
+- ALWAYS use validators for required configuration
+- ALWAYS use "invalid_default_value" for required string fields
+- ALWAYS load settings once at module level
+- NEVER access environment variables directly without validation

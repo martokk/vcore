@@ -1,0 +1,62 @@
+---
+description: Structure SQLModel database models following vCore patterns with proper validation and inheritance
+globs: backend/models/**/*.py
+alwaysApply: false
+---
+
+# vCore Database Models
+
+## Context
+- When creating or modifying database models
+- When implementing data validation and serialization
+- When working with SQLModel table definitions
+
+## Requirements
+- Create separate Base, Create, Update, and Read models
+- Use proper Field definitions with appropriate constraints
+- Implement model_validator for pre-validation logic
+- Use Enums for status and type fields
+- Include proper JSON field handling for metadata
+- Use UUID primary keys with proper generation
+
+## Examples
+
+<example>
+# Good: Proper vCore model structure
+from sqlmodel import Field, SQLModel
+from enum import Enum
+from uuid import UUID, uuid4
+
+class ItemStatus(str, Enum):
+    active = "active"
+    inactive = "inactive"
+
+class ItemBase(SQLModel):
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    name: str = Field(index=True)
+    status: ItemStatus = Field(default=ItemStatus.active)
+
+class Item(ItemBase, table=True):
+    pass
+
+class ItemCreate(ItemBase):
+    pass
+
+class ItemUpdate(SQLModel):
+    name: str | None = None
+    status: ItemStatus | None = None
+</example>
+
+<example type="invalid">
+# Bad: Single model class without proper separation
+class Item(SQLModel, table=True):
+    name: str  # Missing validation, constraints
+    status: str  # Should use Enum
+</example>
+
+## Critical Rules
+- ALWAYS create Base, Create, Update, Read model variants
+- ALWAYS use Enums for status and type fields
+- ALWAYS use UUID primary keys with uuid4 factory
+- ALWAYS include proper Field constraints and indexes
+- NEVER use raw string types for constrained fields

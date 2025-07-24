@@ -1,0 +1,61 @@
+---
+description: Integrate vCore Scripts following framework patterns with proper execution and service integration
+globs: backend/scripts/**/*.py,backend/services/scripts.py
+alwaysApply: false
+---
+
+# vCore Scripts Integration
+
+## Context
+- When creating vCore Scripts for automation tasks
+- When implementing script execution and management
+- When integrating scripts with the job queue system
+
+## Requirements
+- Organize scripts in `backend/scripts/` directory
+- Implement proper script class structure
+- Use script execution service for running scripts
+- Integrate with job queue for background execution
+- Handle script parameters and results properly
+- Include proper logging and error handling
+
+## Examples
+
+<example>
+# Good: Proper vCore Script structure
+# backend/scripts/data_processor.py
+from typing import Any, Dict
+from app import logger
+
+class DataProcessorScript:
+    """Process data using business logic."""
+    
+    def __init__(self, **kwargs: Any) -> None:
+        self.params = kwargs
+        
+    def execute(self) -> Dict[str, Any]:
+        """Execute the script logic."""
+        try:
+            logger.info(f"Starting data processing with params: {self.params}")
+            # Script logic here
+            result = {"success": True, "processed_items": 100}
+            logger.info("Data processing completed successfully")
+            return result
+        except Exception as e:
+            logger.error(f"Script execution failed: {e}")
+            return {"success": False, "error": str(e)}
+</example>
+
+<example type="invalid">
+# Bad: Simple function without proper structure
+def process_data():
+    # No class structure, no proper error handling
+    pass
+</example>
+
+## Critical Rules
+- ALWAYS implement script classes with execute() method
+- ALWAYS include proper logging in script execution
+- ALWAYS handle script errors and return structured results
+- ALWAYS use script service for execution management
+- NEVER implement scripts without proper error handling

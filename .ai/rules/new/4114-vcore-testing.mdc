@@ -1,0 +1,59 @@
+---
+description: Structure tests following vCore patterns with proper fixtures, authentication, and database handling
+globs: tests/**/*.py
+alwaysApply: false
+---
+
+# vCore Testing
+
+## Context
+- When writing tests for vCore Framework functionality
+- When testing API endpoints, CRUD operations, and services
+- When implementing test fixtures and authentication
+
+## Requirements
+- Use pytest with async support for testing
+- Create proper test fixtures for database and authentication
+- Test both API endpoints and CRUD operations
+- Use test client for endpoint testing
+- Mock external dependencies appropriately
+- Follow naming convention: test_function_name_scenario
+
+## Examples
+
+<example>
+# Good: Proper test structure
+import pytest
+from fastapi.testclient import TestClient
+from sqlmodel import Session
+
+def test_create_item_success(
+    client: TestClient,
+    db: Session,
+    superuser_token_headers: dict[str, str]
+) -> None:
+    """Test successful item creation."""
+    data = {"name": "Test Item", "description": "Test Description"}
+    response = client.post(
+        "/api/v1/items/",
+        headers=superuser_token_headers,
+        json=data,
+    )
+    assert response.status_code == 201
+    item = response.json()
+    assert item["name"] == data["name"]
+</example>
+
+<example type="invalid">
+# Bad: Poor test structure
+def test_item():
+    # No fixtures, no authentication, no clear assertions
+    pass
+</example>
+
+## Critical Rules
+- ALWAYS use proper test fixtures for db, client, and auth
+- ALWAYS test both success and failure scenarios
+- ALWAYS use descriptive test function names with scenario
+- ALWAYS use proper HTTP status code assertions
+- NEVER test without proper authentication when required

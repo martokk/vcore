@@ -1,0 +1,53 @@
+---
+description: Implement background job processing using vCore job queue patterns with proper priority management
+globs: backend/jobs/**/*.py,backend/services/**/*.py,backend/models/job.py
+alwaysApply: false
+---
+
+# vCore Job Management
+
+## Context
+- When creating background jobs for processing
+- When implementing job queue functionality
+- When working with Huey task execution
+
+## Requirements
+- Use JobType enum for job classification (command, script, api_post)
+- Set appropriate Priority levels (highest to lowest)
+- Implement proper job status tracking
+- Use WebSocket broadcasting for real-time updates
+- Handle job execution errors and retries
+- Create proper job metadata structure
+
+## Examples
+
+<example>
+# Good: Proper job creation
+from vcore.backend import crud, models
+
+job_data = models.JobCreate(
+    name="Process Data",
+    type=models.JobType.command,
+    command="python process_data.py",
+    priority=models.Priority.high,
+    queue_name="default",
+    meta={"input_file": "data.csv"}
+)
+job = await crud.job.create(db, obj_in=job_data)
+</example>
+
+<example type="invalid">
+# Bad: Manual job creation without proper structure
+job = {
+    "name": "task",
+    "command": "something",
+    # Missing type, priority, proper validation
+}
+</example>
+
+## Critical Rules
+- ALWAYS use JobType enum for job classification
+- ALWAYS set appropriate Priority levels
+- ALWAYS use proper JobStatus tracking
+- ALWAYS include job metadata in meta field
+- NEVER create jobs without proper validation through JobCreate model

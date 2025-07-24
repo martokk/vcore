@@ -1,0 +1,56 @@
+---
+description: Implement authentication using vCore JWT patterns with proper token management and user validation
+globs: backend/core/security.py,backend/routes/api/deps.py,backend/models/user.py
+alwaysApply: false
+---
+
+# vCore Authentication & Security
+
+## Context
+- When implementing user authentication
+- When protecting API endpoints and views
+- When working with JWT tokens and user sessions
+
+## Requirements
+- Use JWT-based stateless authentication
+- Implement proper password hashing with bcrypt
+- Create access and refresh token mechanisms
+- Use dependency injection for authentication
+- Implement role-based access control (superuser/regular)
+- Handle authentication errors gracefully
+
+## Examples
+
+<example>
+# Good: Proper authentication dependency
+from fastapi import Depends, HTTPException
+from vcore.backend import models
+from vcore.backend.routes.api import deps
+
+@router.get("/protected")
+async def protected_endpoint(
+    current_user: models.User = Depends(deps.get_current_active_user),
+):
+    return {"user": current_user.username}
+
+@router.get("/admin-only")
+async def admin_endpoint(
+    current_user: models.User = Depends(deps.get_current_active_superuser),
+):
+    return {"admin": True}
+</example>
+
+<example type="invalid">
+# Bad: Manual token verification
+@app.get("/protected")
+async def endpoint(token: str):
+    # Manual token parsing without proper validation
+    user_id = decode_token_manually(token)
+</example>
+
+## Critical Rules
+- ALWAYS use dependency injection for authentication
+- ALWAYS use get_current_active_user for protected endpoints
+- ALWAYS use get_current_active_superuser for admin endpoints
+- ALWAYS hash passwords using vCore security functions
+- NEVER implement custom JWT handling when vCore provides it

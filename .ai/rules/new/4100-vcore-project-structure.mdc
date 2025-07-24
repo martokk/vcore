@@ -1,0 +1,56 @@
+---
+description: Follow vCore Framework directory structure when creating or modifying files to ensure proper organization
+globs: **/*.py,**/*.html,**/*.js,**/*.css
+alwaysApply: false
+---
+
+# vCore Framework Project Structure
+
+## Context
+- When working with vCore Framework applications
+- When creating new files or organizing existing code
+- When understanding where functionality should be placed
+
+## Requirements
+- Follow the established vCore directory hierarchy
+- Place backend code in `backend/` directory with proper sub-organization
+- Use `frontend/` for templates and static assets
+- Organize code by layer: core, models, crud, routes, services, utils
+- Keep app-specific code separate from vCore framework code
+- Follow naming conventions: snake_case for files, PascalCase for classes
+
+## Examples
+
+<example>
+# Good: Proper vCore structure
+backend/
+  core/           # Core framework services
+  models/         # Data models
+  crud/           # CRUD operations
+  routes/
+    api/v1/endpoints/  # API endpoints
+    views/        # Web page handlers
+  services/       # Business logic
+  utils/          # Helper functions
+  
+frontend/
+  templates/      # Jinja2 templates
+  static/         # CSS, JS, images
+</example>
+
+<example type="invalid">
+# Bad: Mixed organization
+src/
+  everything_mixed_together.py
+  random_utils.py
+templates_somewhere/
+static_elsewhere/
+</example>
+
+## Critical Rules
+- ALWAYS place CRUD operations in `backend/crud/`
+- ALWAYS place API endpoints in `backend/routes/api/v1/endpoints/`
+- ALWAYS place web view handlers in `backend/routes/views/`
+- ALWAYS place business logic in `backend/services/`
+- NEVER mix app-specific code with vCore framework code
+- NEVER create files outside the established directory structure

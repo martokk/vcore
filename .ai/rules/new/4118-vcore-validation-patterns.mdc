@@ -1,0 +1,61 @@
+---
+description: Implement data validation using vCore Pydantic patterns with proper error handling and type safety
+globs: backend/models/**/*.py,backend/routes/**/*.py
+alwaysApply: false
+---
+
+# vCore Validation Patterns
+
+## Context
+- When validating input data in models and endpoints
+- When implementing custom validation logic
+- When handling validation errors and user feedback
+
+## Requirements
+- Use Pydantic validators for complex validation logic
+- Implement field-level validation where appropriate
+- Use proper error messages for validation failures
+- Handle ValidationError exceptions in endpoints
+- Use model_validator for cross-field validation
+- Provide clear validation error responses
+
+## Examples
+
+<example>
+# Good: Proper validation implementation
+from pydantic import model_validator, field_validator
+from sqlmodel import SQLModel
+
+class UserCreate(SQLModel):
+    username: str
+    email: str
+    password: str
+    
+    @field_validator('username')
+    @classmethod
+    def validate_username(cls, v: str) -> str:
+        if len(v) < 3:
+            raise ValueError('Username must be at least 3 characters')
+        return v.lower()
+    
+    @model_validator(mode='after')
+    @classmethod
+    def validate_passwords_match(cls, values):
+        # Cross-field validation logic
+        return values
+</example>
+
+<example type="invalid">
+# Bad: No validation or poor validation
+class UserCreate(SQLModel):
+    username: str  # No validation
+    email: str     # No email format validation
+    password: str  # No strength requirements
+</example>
+
+## Critical Rules
+- ALWAYS use field_validator for field-specific validation
+- ALWAYS use model_validator for cross-field validation
+- ALWAYS provide clear error messages in validators
+- ALWAYS handle ValidationError in API endpoints
+- NEVER skip validation for user input data

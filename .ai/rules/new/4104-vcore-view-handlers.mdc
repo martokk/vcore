@@ -1,0 +1,58 @@
+---
+description: Structure web view handlers following vCore patterns with proper templating and context management
+globs: backend/routes/views/**/*.py
+alwaysApply: false
+---
+
+# vCore View Handlers
+
+## Context
+- When creating web page handlers that render HTML
+- When implementing server-side rendered views
+- When working with Jinja2 templates and form handling
+
+## Requirements
+- Use APIRouter for view organization
+- Use HTMLResponse response class
+- Inject template context via dependency
+- Handle both GET and POST for forms
+- Use proper redirect responses after POST
+- Include proper error handling and alerts
+
+## Examples
+
+<example>
+# Good: Proper vCore view handler
+from fastapi import APIRouter, Depends
+from fastapi.responses import HTMLResponse
+from sqlmodel import Session
+from vcore.backend.core.db import get_db
+from vcore.backend.templating import templates
+from vcore.backend.templating.context import get_template_context
+
+router = APIRouter()
+
+@router.get("/items", response_class=HTMLResponse)
+async def items_page(
+    context: dict = Depends(get_template_context),
+    db: Session = Depends(get_db),
+) -> HTMLResponse:
+    """Display items page."""
+    items = await crud.item.get_all(db)
+    context["items"] = items
+    return templates.TemplateResponse("items/list.html", context)
+</example>
+
+<example type="invalid">
+# Bad: Missing dependencies and proper response handling
+@app.get("/items")
+def items_page():
+    return render_template("items.html")  # Wrong framework
+</example>
+
+## Critical Rules
+- ALWAYS use HTMLResponse as response class
+- ALWAYS inject template context via get_template_context dependency
+- ALWAYS use templates.TemplateResponse for rendering
+- ALWAYS handle form submissions with proper redirects
+- NEVER render templates without proper context injection

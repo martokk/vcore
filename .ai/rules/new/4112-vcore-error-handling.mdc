@@ -1,0 +1,60 @@
+---
+description: Handle errors using vCore exception patterns with proper HTTP status codes and user-friendly messages
+globs: backend/**/*.py
+alwaysApply: false
+---
+
+# vCore Error Handling
+
+## Context
+- When implementing error handling in API endpoints
+- When working with CRUD operations and database errors
+- When creating user-friendly error responses
+
+## Requirements
+- Use vCore exception classes (RecordNotFoundError, etc.)
+- Convert exceptions to appropriate HTTP status codes
+- Provide user-friendly error messages
+- Log errors with proper context
+- Use try/catch blocks for external operations
+- Return consistent error response formats
+
+## Examples
+
+<example>
+# Good: Proper error handling
+from fastapi import HTTPException, status
+from vcore.backend.crud.exceptions import RecordNotFoundError
+from app import logger
+
+@router.get("/{item_id}")
+async def get_item(item_id: str, db: Session = Depends(get_db)):
+    try:
+        return await crud.item.get(db, id=item_id)
+    except RecordNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Item not found"
+        )
+    except Exception as e:
+        logger.error(f"Error retrieving item {item_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error"
+        )
+</example>
+
+<example type="invalid">
+# Bad: Poor error handling
+@router.get("/{item_id}")
+async def get_item(item_id: str):
+    item = crud.item.get(item_id)  # No error handling
+    return item  # Could fail silently
+</example>
+
+## Critical Rules
+- ALWAYS use try/except blocks for CRUD operations
+- ALWAYS convert vCore exceptions to appropriate HTTPException
+- ALWAYS log errors with proper context
+- ALWAYS provide user-friendly error messages
+- NEVER let exceptions bubble up without handling
