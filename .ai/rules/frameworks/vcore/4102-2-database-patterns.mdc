@@ -34,8 +34,8 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, Form, Response
 from sqlmodel import Session
 
-from backend.core.db import get_db
-from backend.models.user import User
+from vcore.backend.core.db import get_db
+from vcore.backend.models.user import User
 
 @router.post("/endpoint", response_class=Response)
 async def handler(
@@ -78,7 +78,7 @@ class ExampleRead(SQLModel):
 # Good: CRUD Implementation using BaseCRUD
 
 from app import models
-from backend.crud.base import BaseCRUD
+from vcore.backend.crud.base import BaseCRUD
 
 class ExampleCRUD(BaseCRUD[models.Example, models.ExampleCreate, models.ExampleUpdate]):
     # Custom methods if needed
@@ -127,12 +127,12 @@ async def update_example(
 
 # In app/models/__init__.py or vcore/backend/models/__init__.py
 
-from backend.models.user import User, UserCreate, UserUpdate, UserRead
+from vcore.backend.models.user import User, UserCreate, UserUpdate, UserRead
 from app.models.example import Example, ExampleCreate, ExampleUpdate, ExampleRead
 
 # In app/crud/__init__.py or vcore/backend/crud/__init__.py
 
-from backend.crud.user import user
+from vcore.backend.crud.user import user
 from app.crud.example import example
 </example>
 

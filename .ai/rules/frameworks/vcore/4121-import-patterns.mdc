@@ -1,5 +1,5 @@
 ---
-description: USE direct imports from the app package for core modules to ENSURE consistent import patterns across the codebase
+description: USE direct imports from the app or vcore packages for core modules to ENSURE consistent import patterns across the codebase
 globs: **/*.py
 alwaysApply: false
 ---
@@ -15,8 +15,8 @@ alwaysApply: false
 
 ## Requirements
 
-- Always use direct imports from the `app` package or `backend` package for core modules
-- Use aggregated imports from `app.models` and `app.crud` or `backend.models` and `backend.crud` rather than deep imports
+- Always use direct imports from the `app` package or `vcore.backend` package for core modules
+- Use aggregated imports from `app.models` and `app.crud` or `vcore.backend.models` and `vcore.backend.crud` rather than deep imports
 - Maintain consistent import patterns across the entire codebase
 - Avoid importing specific components directly from deeper modules
 - Follow the centralized import pattern established in the application
@@ -24,10 +24,10 @@ alwaysApply: false
 ## Examples
 
 <example>
-# Good: Proper imports from app package
+# Good: Proper imports from app or vcore package
 
-from backend import crud
-from backend import models
+from vcore.backend import crud
+from vcore.backend import models
 from app import logger
 from app import settings
 from app import paths
@@ -62,10 +62,10 @@ debug_mode = settings.DEBUG
 <example type="invalid">
 # Bad: Direct imports from deeper modules
 
-from backend.models.user import User
-from backend.models.example import Example, ExampleCreate, ExampleUpdate
-from backend.crud.user import user
-from backend.crud.example import example
+from vcore.backend.models.user import User
+from vcore.backend.models.example import Example, ExampleCreate, ExampleUpdate
+from vcore.backend.crud.user import user
+from vcore.backend.crud.example import example
 from app.settings import Settings
 from app.paths import STATIC_PATH
 from app.logger import logger
@@ -96,18 +96,18 @@ The following core modules should always be imported directly from the `app` pac
 
 | Module | Description | Correct Import | Incorrect Import |
 |--------|-------------|----------------|-----------------|
-| `models` | Database models | `from app import models` or `from backend import models` | `from app.models.user import User` or `from backend.models.user import User` |
-| `crud` | CRUD operations | `from app import crud` or `from backend import crud` | `from app.crud.user import user` or `from backend.crud.user import user` |
-| `logger` | Logging functions | `from app import logger` or `from backend import logger` | `from app.logger import logger` or `from backend.logger import logger` |
-| `settings` | Application settings | `from app import settings` or `from backend import settings` | `from app.settings import Settings` or `from backend.settings import Settings` |
-| `paths` | Path constants | `from app import paths` or `from backend import paths` | `from app.paths import STATIC_PATH` or `from backend.paths import STATIC_PATH` |
+| `models` | Database models | `from app import models` or `from vcore.backend import models` | `from app.models.user import User` or `from vcore.backend.models.user import User` |
+| `crud` | CRUD operations | `from app import crud` or `from vcore.backend import crud` | `from app.crud.user import user` or `from vcore.backend.crud.user import user` |
+| `logger` | Logging functions | `from app import logger` or `from vcore.backend import logger` | `from app.logger import logger` or `from vcore.backend.logger import logger` |
+| `settings` | Application settings | `from app import settings` or `from vcore.backend import settings` | `from app.settings import Settings` or `from vcore.backend.settings import Settings` |
+| `paths` | Path constants | `from app import paths` or `from vcore.backend import paths` | `from app.paths import STATIC_PATH` or `from vcore.backend.paths import STATIC_PATH` |
 
 ## Usage Patterns
 
 ### Models Usage
 
 ```python
-from app import models # or from backend import models
+from app import models # or from vcore.backend import models
 
 # Accessing model classes
 user = models.User(username="example")
@@ -121,7 +121,7 @@ def get_user(user_id: int) -> models.User:
 ### CRUD Usage
 
 ```python
-from app import crud # or from backend import crud
+from app import crud # or from vcore.backend import crud
 
 # Performing CRUD operations
 user = await crud.user.get(db=db, id=user_id)
@@ -145,7 +145,7 @@ templates_dir = paths.TEMPLATES_DIR
 
 ## Critical Rules
 
-- Always import core modules directly from the app package (`from app import models`) or `backend` package (`from backend import models`)
+- Always import core modules directly from the app package (`from app import models`) or `vcore.backend` package (`from vcore.backend import models`)
 - Never import specific models or CRUD operations directly from their modules
 - Maintain consistent import patterns throughout the codebase
 - All database models must be accessed through the `models` namespace

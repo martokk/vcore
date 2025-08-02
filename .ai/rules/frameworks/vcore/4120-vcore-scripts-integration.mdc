@@ -1,17 +1,19 @@
 ---
-description: Integrate vCore Scripts following framework patterns with proper execution and service integration
-globs: backend/scripts/**/*.py,backend/services/scripts.py
+description: Integrate vCore Scripts when creating automation to follow framework execution patterns
+globs: **/scripts/**/*.py,**/services/scripts.py
 alwaysApply: false
 ---
 
 # vCore Scripts Integration
 
 ## Context
+
 - When creating vCore Scripts for automation tasks
 - When implementing script execution and management
 - When integrating scripts with the job queue system
 
 ## Requirements
+
 - Organize scripts in `backend/scripts/` directory
 - Implement proper script class structure
 - Use script execution service for running scripts
@@ -29,7 +31,7 @@ from app import logger
 
 class DataProcessorScript:
     """Process data using business logic."""
-    
+
     def __init__(self, **kwargs: Any) -> None:
         self.params = kwargs
         
@@ -54,6 +56,7 @@ def process_data():
 </example>
 
 ## Critical Rules
+
 - ALWAYS implement script classes with execute() method
 - ALWAYS include proper logging in script execution
 - ALWAYS handle script errors and return structured results

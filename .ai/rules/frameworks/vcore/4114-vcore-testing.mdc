@@ -1,5 +1,5 @@
 ---
-description: Structure tests following vCore patterns with proper fixtures, authentication, and database handling
+description: Structure tests when writing test cases to use vCore fixture and authentication patterns
 globs: tests/**/*.py
 alwaysApply: false
 ---
@@ -7,11 +7,13 @@ alwaysApply: false
 # vCore Testing
 
 ## Context
+
 - When writing tests for vCore Framework functionality
 - When testing API endpoints, CRUD operations, and services
 - When implementing test fixtures and authentication
 
 ## Requirements
+
 - Use pytest with async support for testing
 - Create proper test fixtures for database and authentication
 - Test both API endpoints and CRUD operations
@@ -52,6 +54,7 @@ def test_item():
 </example>
 
 ## Critical Rules
+
 - ALWAYS use proper test fixtures for db, client, and auth
 - ALWAYS test both success and failure scenarios
 - ALWAYS use descriptive test function names with scenario

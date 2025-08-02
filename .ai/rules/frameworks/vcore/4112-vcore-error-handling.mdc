@@ -1,17 +1,19 @@
 ---
-description: Handle errors using vCore exception patterns with proper HTTP status codes and user-friendly messages
-globs: backend/**/*.py
+description: Handle errors when implementing endpoints to use vCore exception and HTTP status patterns
+globs: **/*.py
 alwaysApply: false
 ---
 
 # vCore Error Handling
 
 ## Context
+
 - When implementing error handling in API endpoints
 - When working with CRUD operations and database errors
 - When creating user-friendly error responses
 
 ## Requirements
+
 - Use vCore exception classes (RecordNotFoundError, etc.)
 - Convert exceptions to appropriate HTTP status codes
 - Provide user-friendly error messages
@@ -53,6 +55,7 @@ async def get_item(item_id: str):
 </example>
 
 ## Critical Rules
+
 - ALWAYS use try/except blocks for CRUD operations
 - ALWAYS convert vCore exceptions to appropriate HTTPException
 - ALWAYS log errors with proper context

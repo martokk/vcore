@@ -1,17 +1,19 @@
 ---
-description: Create Quick Tools following vCore patterns with proper template structure and API integration
-globs: frontend/templates/quick_tools/**/*.html,backend/routes/views/quick_tools/**/*.py,backend/routes/api/v1/endpoints/quick_tools/**/*.py
+description: Create Quick Tools when building utilities to follow vCore template and API patterns
+globs: frontend/templates/quick_tools/**/*.html,**/routes/views/quick_tools/**/*.py,**/routes/api/v1/endpoints/quick_tools/**/*.py
 alwaysApply: false
 ---
 
 # vCore Quick Tools
 
 ## Context
+
 - When creating new Quick Tools for rapid utility development
 - When implementing single-purpose administrative tools
 - When building tools with simple form input and result display
 
 ## Requirements
+
 - Extend from `quick_tools/quick_tool_base.html` template
 - Implement required template blocks consistently
 - Create corresponding API endpoint for form processing
@@ -61,6 +63,7 @@ alwaysApply: false
 </example>
 
 ## Critical Rules
+
 - ALWAYS extend from `quick_tools/quick_tool_base.html`
 - ALWAYS implement all required template blocks
 - ALWAYS use FormProcessor.js for form handling

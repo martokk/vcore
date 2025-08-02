@@ -1,17 +1,19 @@
 ---
-description: Use FastAPI dependency injection following vCore patterns for database sessions, authentication, and context
-globs: backend/routes/**/*.py,backend/core/deps.py
+description: Use dependency injection when creating endpoints to follow vCore database and auth patterns
+globs: **/routes/**/*.py
 alwaysApply: false
 ---
 
 # vCore Dependency Injection
 
 ## Context
+
 - When creating API endpoints or view handlers
 - When working with database sessions and authentication
 - When implementing reusable dependencies
 
 ## Requirements
+
 - Use Depends() for all injectable dependencies
 - Create reusable dependency functions in deps modules
 - Use proper type hints for dependency return types
@@ -48,6 +50,7 @@ async def endpoint():
 </example>
 
 ## Critical Rules
+
 - ALWAYS use Depends() for injectable dependencies
 - ALWAYS use get_db for database session dependencies
 - ALWAYS use authentication dependencies for protected endpoints

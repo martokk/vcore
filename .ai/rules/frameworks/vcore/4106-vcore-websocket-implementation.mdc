@@ -1,17 +1,19 @@
 ---
-description: Implement WebSocket connections using vCore patterns for real-time communication and broadcasting
-globs: backend/core/websocket.py,backend/services/**/*ws*.py,backend/routes/**/*ws*.py
+description: Implement WebSocket connections when adding real-time features to use vCore WebSocketManager
+globs: **/services/**/*ws*.py,**/routes/**/*ws*.py
 alwaysApply: false
 ---
 
 # vCore WebSocket Implementation
 
 ## Context
+
 - When implementing real-time communication features
 - When creating WebSocket endpoints for live updates
 - When managing WebSocket connections and broadcasting
 
 ## Requirements
+
 - Use WebSocketManager base class for connection management
 - Implement proper connect/disconnect handling
 - Use JSON message format for communication
@@ -48,6 +50,7 @@ async def websocket(websocket):
 </example>
 
 ## Critical Rules
+
 - ALWAYS use WebSocketManager for connection management
 - ALWAYS handle WebSocketDisconnect exceptions
 - ALWAYS use JSON format for WebSocket messages

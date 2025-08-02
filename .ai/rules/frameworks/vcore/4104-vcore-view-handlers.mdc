@@ -1,17 +1,19 @@
 ---
-description: Structure web view handlers following vCore patterns with proper templating and context management
-globs: backend/routes/views/**/*.py
+description: Structure page view handlers when creating web pages to follow vCore templating patterns
+globs: **/routes/views/**/*.py
 alwaysApply: false
 ---
 
 # vCore View Handlers
 
 ## Context
+
 - When creating web page handlers that render HTML
 - When implementing server-side rendered views
 - When working with Jinja2 templates and form handling
 
 ## Requirements
+
 - Use APIRouter for view organization
 - Use HTMLResponse response class
 - Inject template context via dependency
@@ -51,6 +53,7 @@ def items_page():
 </example>
 
 ## Critical Rules
+
 - ALWAYS use HTMLResponse as response class
 - ALWAYS inject template context via get_template_context dependency
 - ALWAYS use templates.TemplateResponse for rendering

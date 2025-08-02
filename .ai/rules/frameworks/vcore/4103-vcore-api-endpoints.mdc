@@ -1,17 +1,19 @@
 ---
-description: Structure FastAPI endpoints following vCore patterns with proper authentication and error handling
-globs: backend/routes/api/**/*.py
+description: Structure FastAPI endpoints when creating APIs to follow vCore authentication and error patterns
+globs: **/routes/api/**/*.py
 alwaysApply: false
 ---
 
 # vCore API Endpoints
 
 ## Context
+
 - When creating REST API endpoints
 - When implementing CRUD operations via HTTP
 - When working with FastAPI routers and dependencies
 
 ## Requirements
+
 - Use APIRouter with proper prefix and tags
 - Implement proper dependency injection for database and auth
 - Use response models and proper status codes
@@ -50,6 +52,7 @@ def get_items():
 </example>
 
 ## Critical Rules
+
 - ALWAYS use APIRouter with prefix and tags
 - ALWAYS use proper dependency injection for db and auth
 - ALWAYS include response_model and status codes

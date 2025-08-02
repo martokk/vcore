@@ -1,17 +1,19 @@
 ---
-description: Implement data validation using vCore Pydantic patterns with proper error handling and type safety
-globs: backend/models/**/*.py,backend/routes/**/*.py
+description: Implement data validation when creating models to use vCore Pydantic validation patterns
+globs: **/models/**/*.py,**/routes/**/*.py
 alwaysApply: false
 ---
 
 # vCore Validation Patterns
 
 ## Context
+
 - When validating input data in models and endpoints
 - When implementing custom validation logic
 - When handling validation errors and user feedback
 
 ## Requirements
+
 - Use Pydantic validators for complex validation logic
 - Implement field-level validation where appropriate
 - Use proper error messages for validation failures
@@ -30,7 +32,7 @@ class UserCreate(SQLModel):
     username: str
     email: str
     password: str
-    
+
     @field_validator('username')
     @classmethod
     def validate_username(cls, v: str) -> str:
@@ -54,6 +56,7 @@ class UserCreate(SQLModel):
 </example>
 
 ## Critical Rules
+
 - ALWAYS use field_validator for field-specific validation
 - ALWAYS use model_validator for cross-field validation
 - ALWAYS provide clear error messages in validators

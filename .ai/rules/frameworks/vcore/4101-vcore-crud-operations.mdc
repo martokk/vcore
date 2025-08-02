@@ -1,24 +1,52 @@
 ---
 description: FOLLOW when CREATING new models or CRUD modules to ensure they are properly registered in __init__.py
-globs: app/models/*.py,app/crud/*.py,vcore/backend/models/*.py,vcore/backend/crud/*.py
+globs: **/crud/**/*.py,**/models/**/*.py
 alwaysApply: false
 ---
 
-# Model and CRUD Registration
+# vCore CRUD Operations
 
 ## Context
 
 - When creating a new model in the `app/models/` or `vcore/backend/models/` directory
 - When creating a new CRUD module in the `app/crud/` or `vcore/backend/crud/` directory
 - When reviewing newly added models or CRUD modules
+- When creating database operations for models in your vCore-based application
+- When implementing data access patterns using vCore framework
+- When working with SQLModel database interactions through vCore
 
 ## Requirements
 
+- Always inherit from vCore's `BaseCRUD` for standard models
+- Use vCore's `BaseOrderedCRUD` for models requiring position management
+- Implement custom CRUD methods in model-specific classes in your app
 - Register all new models in `app/models/__init__.py` or `vcore/backend/models/__init__.py`
 - Register all new CRUD modules in `app/crud/__init__.py` or `vcore/backend/crud/__init__.py`
 - Use consistent import pattern: `from .[module_name] import *`
 - Maintain alphabetical ordering in import statements
 - Do not modify any other code in the __init__.py files
+
+## Examples
+
+<example>
+# Good: Proper CRUD implementation in your app
+from vcore.backend.crud.base import BaseCRUD
+from app.models import MyModel, MyModelCreate, MyModelUpdate
+
+class MyModelCRUD(BaseCRUD[MyModel, MyModelCreate, MyModelUpdate]):
+    async def custom_query(self, db: Session, **filters) -> list[MyModel]:
+        return await self.get_multi(db,**filters)
+
+my_model = MyModelCRUD(model=MyModel)
+</example>
+
+<example type="invalid">
+# Bad: Direct database queries without vCore CRUD
+from sqlmodel import select
+
+def get_models(db: Session):
+    return db.exec(select(MyModel)).all()  # Should use vCore CRUD patterns
+</example>
 
 ## Registration Process
 
@@ -84,9 +112,13 @@ from .new_model import *
 
 ## Critical Rules
 
+- ALWAYS use vCore's BaseCRUD or BaseOrderedCRUD as base classes
+- ALWAYS create CRUD instance at module level: `model_name = ModelCRUD(model=Model)`
+- ALWAYS use type hints with Generic[ModelType, CreateType, UpdateType]
+- NEVER write direct SQL queries when vCore CRUD methods exist
+- ALWAYS handle vCore CRUD exceptions (RecordNotFoundError, etc.)
 - ALWAYS add an import for new model files to `app/models/__init__.py` or `vcore/backend/models/__init__.py`
 - ALWAYS add an import for new CRUD modules to `app/crud/__init__.py` or `vcore/backend/crud/__init__.py`
 - ALWAYS use the format `from .[module_name] import *`
 - ALWAYS maintain alphabetical ordering of imports
 - NEVER modify existing import statements
-- NEVER add anything else besides the import statement

@@ -1,17 +1,19 @@
 ---
-description: Implement authentication using vCore JWT patterns with proper token management and user validation
-globs: backend/core/security.py,backend/routes/api/deps.py,backend/models/user.py
+description: Implement authentication when protecting endpoints to use vCore JWT dependency patterns
+globs: **/deps.py,**/models/user.py
 alwaysApply: false
 ---
 
 # vCore Authentication & Security
 
 ## Context
+
 - When implementing user authentication
 - When protecting API endpoints and views
 - When working with JWT tokens and user sessions
 
 ## Requirements
+
 - Use JWT-based stateless authentication
 - Implement proper password hashing with bcrypt
 - Create access and refresh token mechanisms
@@ -49,6 +51,7 @@ async def endpoint(token: str):
 </example>
 
 ## Critical Rules
+
 - ALWAYS use dependency injection for authentication
 - ALWAYS use get_current_active_user for protected endpoints
 - ALWAYS use get_current_active_superuser for admin endpoints

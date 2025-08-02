@@ -1,17 +1,19 @@
 ---
-description: Structure utility functions following vCore patterns with proper organization and reusability
-globs: backend/utils/**/*.py
+description: Structure utility functions when creating helpers to ensure vCore organization patterns
+globs: **/utils/**/*.py
 alwaysApply: false
 ---
 
 # vCore Utilities
 
 ## Context
+
 - When creating helper functions and utilities
 - When implementing reusable functionality
 - When working with data transformation and formatting
 
 ## Requirements
+
 - Organize utilities by functional domain (datetime, uuid, etc.)
 - Create pure functions without side effects where possible
 - Use proper type hints and documentation
@@ -45,6 +47,7 @@ def process_thing(data):
 </example>
 
 ## Critical Rules
+
 - ALWAYS use proper type hints for parameters and returns
 - ALWAYS include docstrings explaining purpose and usage
 - ALWAYS handle edge cases and invalid inputs

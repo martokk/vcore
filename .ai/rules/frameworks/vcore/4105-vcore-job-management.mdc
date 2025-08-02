@@ -1,17 +1,19 @@
 ---
-description: Implement background job processing using vCore job queue patterns with proper priority management
-globs: backend/jobs/**/*.py,backend/services/**/*.py,backend/models/job.py
+description: Implement job processing when creating background tasks to use vCore queue patterns
+globs: **/jobs/**/*.py,**/services/**/*.py,**/models/job.py
 alwaysApply: false
 ---
 
 # vCore Job Management
 
 ## Context
+
 - When creating background jobs for processing
 - When implementing job queue functionality
 - When working with Huey task execution
 
 ## Requirements
+
 - Use JobType enum for job classification (command, script, api_post)
 - Set appropriate Priority levels (highest to lowest)
 - Implement proper job status tracking
@@ -46,6 +48,7 @@ job = {
 </example>
 
 ## Critical Rules
+
 - ALWAYS use JobType enum for job classification
 - ALWAYS set appropriate Priority levels
 - ALWAYS use proper JobStatus tracking

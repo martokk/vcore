@@ -1,23 +1,31 @@
 ---
-description: Implement logging using vCore patterns with proper levels and structured information
-globs: backend/**/*.py
+description: USE app.logger when LOGGING in Python to ensure consistent logging across the codebase
+globs: **/*.py
 alwaysApply: false
 ---
 
 # vCore Logging
 
 ## Context
+
 - When adding logging to application functionality
 - When debugging and monitoring application behavior
 - When tracking important events and errors
+- When adding logging statements to Python files
+- When refactoring existing logging code
+- When creating new modules that require logging
 
 ## Requirements
+
+- Import the logger directly from the app module (`from app import logger`)
 - Use the app logger instance for consistency  
-- Use appropriate log levels (DEBUG, INFO, WARNING, ERROR)
+- Never create new logger instances with logging.getLogger()
 - Include contextual information in log messages
 - Log important business events and errors
 - Use structured logging with relevant data
 - Avoid logging sensitive information
+- Include contextual information in log messages when appropriate
+- Always log the exception before raising it
 
 ## Examples
 
@@ -43,7 +51,9 @@ logging.info("Something happened")  # No context
 </example>
 
 ## Critical Rules
+
 - ALWAYS use the app logger instance (from app import logger)
+- NEVER use `import logging` followed by `logger = logging.getLogger(__name__)`
 - ALWAYS include relevant context in log messages (IDs, operations)
 - ALWAYS use appropriate log levels for message severity
 - NEVER log sensitive information (passwords, tokens)

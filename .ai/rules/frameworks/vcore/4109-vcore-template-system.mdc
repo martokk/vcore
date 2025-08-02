@@ -1,17 +1,19 @@
 ---
-description: Structure Jinja2 templates following vCore patterns with proper inheritance and context management
-globs: frontend/templates/**/*.html,backend/templating/**/*.py
+description: Structure Jinja2 templates when creating HTML views to follow vCore inheritance patterns
+globs: frontend/templates/**/*.html
 alwaysApply: false
 ---
 
 # vCore Template System
 
 ## Context
+
 - When creating or modifying Jinja2 templates
 - When implementing template inheritance and blocks
 - When working with template context and filters
 
 ## Requirements
+
 - Use proper template inheritance with base templates
 - Implement required template blocks consistently
 - Use template context injection for dynamic data
@@ -52,6 +54,7 @@ alwaysApply: false
 </example>
 
 ## Critical Rules
+
 - ALWAYS extend from appropriate base templates
 - ALWAYS implement required template blocks
 - ALWAYS use template context for dynamic content

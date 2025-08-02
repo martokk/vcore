@@ -36,7 +36,7 @@ from sqlmodel import Session
 
 from app import crud, models
 from app.routes.api.deps import get_current_active_user
-from backend.core.db import get_db
+from vcore.backend.core.db import get_db
 
 router = APIRouter(prefix="/[entity_plural]", tags=["[Entity_plural]"])
 
@@ -128,9 +128,9 @@ from fastapi.responses import HTMLResponse
 from sqlmodel import Session
 
 from app import crud
-from backend.core.db import get_db
-from backend.templating import templates
-from backend.templating.context import get_template_context
+from vcore.backend.core.db import get_db
+from vcore.backend.templating import templates
+from vcore.backend.templating.context import get_template_context
 
 router = APIRouter(tags=["[entity_plural]"])
 
@@ -313,7 +313,7 @@ def update(id: int, data: dict, db: Session = Depends(get_db)):
 {% endblock %}
 ```
 
-## Navigation Link (frontend/templates/base/navbar_logged_in.html)
+## Navigation Link (frontend/templates/base/_sidebar.html)
 
 ```html
 <li class="nav-item">
@@ -348,7 +348,7 @@ Register the new routes in:
 
 ### 5. Navigation Link
 
-Add a navigation link in `frontend/templates/base/navbar_logged_in.html` to make the new page accessible.
+Add a navigation link in `frontend/templates/base/_sidebar.html` to make the new page accessible.
 
 ## Best Practices
 
@@ -379,7 +379,6 @@ Add a navigation link in `frontend/templates/base/navbar_logged_in.html` to make
 
 ## Critical Rules
 
-- __MOST IMPORTANT__: DO NOT MAKE SWEEPING CHANGES TO EXISTING CODE. You cause more bugs and problems than you solve. If you are given a task to do, only change the code that is directly related to the task.
 - Always follow the established CRUD pattern for all new data types
 - Always implement proper error handling in both API and UI components
 - Always include authentication dependencies for protected endpoints
