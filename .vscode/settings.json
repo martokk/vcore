@@ -220,5 +220,8 @@
 	"editor.someSetting": true,
 	"markdownlint.config": {
 		"MD024": false,
+		"MD041": false,
+		"MD003": false,
+		"MD033": false,
 	}
 }
